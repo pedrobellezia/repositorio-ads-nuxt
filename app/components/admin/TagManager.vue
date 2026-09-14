@@ -84,9 +84,13 @@ function handleDeleteTag(tag: Tag) {
       </div>
     </div>
 
-    <div class="space-y-6">
-      <div v-for="category in categories" :key="category.id">
-        <h3 class="mb-2 text-sm font-semibold text-slate-700">
+    <div class="space-y-4">
+      <div
+        v-for="category in categories"
+        :key="category.id"
+        class="rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]"
+      >
+        <h3 class="mb-2 font-heading text-sm font-semibold text-secondary">
           {{ category.name }}
         </h3>
         <p v-if="category.tags.length === 0" class="text-xs text-slate-500">
@@ -101,7 +105,7 @@ function handleDeleteTag(tag: Tag) {
             <SiteTagIcon :icon="tag.icon" class="h-3.5 w-3.5" />
             {{ tag.name }}
             <button
-              class="rounded-full px-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+              class="rounded-full px-1.5 text-slate-400 hover:bg-white hover:text-red-600"
               @click="handleDeleteTag(tag)"
             >
               ×
