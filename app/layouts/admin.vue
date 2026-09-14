@@ -30,49 +30,51 @@ function navLinkClass(path: string) {
         );
       "
     >
-      <div
-        class="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-4 px-4 py-3"
-      >
-        <div class="flex items-center gap-6">
-          <NuxtLink to="/" class="flex items-center gap-2 rounded-lg bg-white/95 px-3 py-1.5">
+      <div class="mx-auto w-full max-w-3xl px-4 py-4">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <NuxtLink
+            to="/"
+            class="flex items-center gap-2 rounded-xl bg-white px-4 py-2 shadow-sm"
+          >
             <img
               src="/fmp-logo.png"
               alt="FMP — Faculdade Municipal de Palhoça"
               width="150"
               height="30"
-              class="h-6 w-auto"
+              class="h-8 w-auto"
             />
           </NuxtLink>
-          <nav class="flex gap-1 font-heading text-sm font-medium">
-            <NuxtLink to="/admin/items" :class="navLinkClass('/admin/items')">
-              Itens
-            </NuxtLink>
-            <NuxtLink to="/admin/tags" :class="navLinkClass('/admin/tags')">
-              Tags
-            </NuxtLink>
-            <template v-if="isAdmin">
-              <NuxtLink
-                to="/admin/categories"
-                :class="navLinkClass('/admin/categories')"
-              >
-                Categorias
-              </NuxtLink>
-              <NuxtLink
-                to="/admin/professors"
-                :class="navLinkClass('/admin/professors')"
-              >
-                Professores
-              </NuxtLink>
-            </template>
-          </nav>
+          <div class="flex items-center gap-3 text-sm text-white/80">
+            <span>
+              {{ profile?.display_name ?? "Sem nome" }} ·
+              {{ isAdmin ? "admin" : "professor" }}
+            </span>
+            <AdminSignOutButton class="text-white hover:bg-white/15 hover:text-white" />
+          </div>
         </div>
-        <div class="flex items-center gap-3 text-sm text-white/80">
-          <span>
-            {{ profile?.display_name ?? "Sem nome" }} ·
-            {{ isAdmin ? "admin" : "professor" }}
-          </span>
-          <AdminSignOutButton class="text-white hover:bg-white/15 hover:text-white" />
-        </div>
+
+        <nav class="mt-4 flex flex-wrap gap-1 font-heading text-sm font-medium">
+          <NuxtLink to="/admin/items" :class="navLinkClass('/admin/items')">
+            Itens
+          </NuxtLink>
+          <NuxtLink to="/admin/tags" :class="navLinkClass('/admin/tags')">
+            Tags
+          </NuxtLink>
+          <template v-if="isAdmin">
+            <NuxtLink
+              to="/admin/categories"
+              :class="navLinkClass('/admin/categories')"
+            >
+              Categorias
+            </NuxtLink>
+            <NuxtLink
+              to="/admin/professors"
+              :class="navLinkClass('/admin/professors')"
+            >
+              Professores
+            </NuxtLink>
+          </template>
+        </nav>
       </div>
     </header>
     <div class="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
