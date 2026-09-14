@@ -1,6 +1,9 @@
 <script setup lang="ts">
-const { data: items } = await usePublicItems();
-const { data: categories } = await useTagCategories();
+const itemsAsyncData = usePublicItems();
+const categoriesAsyncData = useTagCategories();
+
+const { data: items } = await itemsAsyncData;
+const { data: categories } = await categoriesAsyncData;
 </script>
 
 <template>

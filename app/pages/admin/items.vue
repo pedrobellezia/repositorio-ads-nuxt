@@ -1,9 +1,13 @@
 <script setup lang="ts">
 definePageMeta({ layout: "admin" });
 
-const { data: items } = await usePublicItems();
-const { data: categories } = await useTagCategories();
-const { data: profile } = await useProfile();
+const itemsAsyncData = usePublicItems();
+const categoriesAsyncData = useTagCategories();
+const profileAsyncData = useProfile();
+
+const { data: items } = await itemsAsyncData;
+const { data: categories } = await categoriesAsyncData;
+const { data: profile } = await profileAsyncData;
 </script>
 
 <template>
