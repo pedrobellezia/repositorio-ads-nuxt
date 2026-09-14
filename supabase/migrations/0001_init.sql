@@ -56,7 +56,7 @@ create table if not exists public.items (
   name text not null,
   description text not null default '',
   phase text not null default 'geral' check (
-    phase in ('geral', '1fase', '2fase', '3fase', '4fase', '5fase', '6fase', '7fase')
+    phase in ('geral', '1fase', '2fase', '3fase', '4fase', '5fase')
   ),
   professor_name text,
   link_url text,

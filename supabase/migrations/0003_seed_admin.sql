@@ -1,6 +1,6 @@
 -- Cria o usuário admin padrão diretamente em auth.users/auth.identities
 -- (idempotente: não faz nada se o e-mail já existir).
--- Login: admin@fmp.edu.br / trocar-depois-123 — troque a senha depois.
+-- Login: admin@fmp.edu.br / admin — troque a senha depois.
 do $$
 declare
   v_user_id uuid;
@@ -34,7 +34,7 @@ begin
       'authenticated',
       'authenticated',
       'admin@fmp.edu.br',
-      extensions.crypt('trocar-depois-123', extensions.gen_salt('bf')),
+      extensions.crypt('admin', extensions.gen_salt('bf')),
       now(),
       '{"provider":"email","providers":["email"]}',
       '{"display_name":"Administrador"}',
