@@ -11,8 +11,14 @@ defineProps<{
 
 <template>
   <div
-    class="flex flex-col gap-3 rounded-2xl border border-accent-border/30 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+    class="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-accent-border/20 bg-surface p-5 shadow-[0_1rem_2rem_-0.5rem_rgba(3,46,71,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_1.5rem_3rem_-0.75rem_rgba(3,46,71,0.2)]"
   >
+    <span
+      class="absolute inset-x-0 top-0 h-1.5"
+      :style="{ backgroundColor: PHASE_COLORS[item.phase] }"
+      aria-hidden="true"
+    />
+
     <div class="flex items-start justify-between gap-2">
       <h3 class="font-heading font-semibold text-secondary">{{ item.name }}</h3>
       <span

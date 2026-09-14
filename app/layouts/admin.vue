@@ -6,51 +6,65 @@ const isAdmin = computed(() => profile.value?.role === "admin");
 </script>
 
 <template>
-  <div class="mx-auto flex w-full max-w-5xl flex-1 flex-col px-4 py-8">
-    <header
-      class="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-accent-border/30 pb-4"
-    >
-      <div class="flex items-center gap-6">
-        <NuxtLink to="/" class="flex items-center gap-2">
-          <img
-            src="/fmp-logo.png"
-            alt="FMP — Faculdade Municipal de Palhoça"
-            width="150"
-            height="30"
-            class="h-6 w-auto"
-          />
-        </NuxtLink>
-        <nav class="flex gap-4 font-heading text-sm font-medium">
-          <NuxtLink to="/admin/items" class="text-secondary hover:text-primary">
-            Itens
+  <div class="flex min-h-full flex-1 flex-col">
+    <header class="border-b border-accent-border/20 bg-surface shadow-sm">
+      <div
+        class="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-4"
+      >
+        <div class="flex items-center gap-6">
+          <NuxtLink to="/" class="flex items-center gap-2">
+            <img
+              src="/fmp-logo.png"
+              alt="FMP — Faculdade Municipal de Palhoça"
+              width="150"
+              height="30"
+              class="h-6 w-auto"
+            />
           </NuxtLink>
-          <NuxtLink to="/admin/tags" class="text-secondary hover:text-primary">
-            Tags
-          </NuxtLink>
-          <template v-if="isAdmin">
+          <nav class="flex gap-1 font-heading text-sm font-medium">
             <NuxtLink
-              to="/admin/categories"
-              class="text-secondary hover:text-primary"
+              to="/admin/items"
+              class="rounded-full px-3 py-1.5 text-secondary transition-colors hover:bg-section"
+              active-class="bg-secondary text-white hover:bg-secondary"
             >
-              Categorias
+              Itens
             </NuxtLink>
             <NuxtLink
-              to="/admin/professors"
-              class="text-secondary hover:text-primary"
+              to="/admin/tags"
+              class="rounded-full px-3 py-1.5 text-secondary transition-colors hover:bg-section"
+              active-class="bg-secondary text-white hover:bg-secondary"
             >
-              Professores
+              Tags
             </NuxtLink>
-          </template>
-        </nav>
-      </div>
-      <div class="flex items-center gap-3 text-sm text-slate-500">
-        <span>
-          {{ profile?.display_name ?? "Sem nome" }} ·
-          {{ isAdmin ? "admin" : "professor" }}
-        </span>
-        <AdminSignOutButton />
+            <template v-if="isAdmin">
+              <NuxtLink
+                to="/admin/categories"
+                class="rounded-full px-3 py-1.5 text-secondary transition-colors hover:bg-section"
+                active-class="bg-secondary text-white hover:bg-secondary"
+              >
+                Categorias
+              </NuxtLink>
+              <NuxtLink
+                to="/admin/professors"
+                class="rounded-full px-3 py-1.5 text-secondary transition-colors hover:bg-section"
+                active-class="bg-secondary text-white hover:bg-secondary"
+              >
+                Professores
+              </NuxtLink>
+            </template>
+          </nav>
+        </div>
+        <div class="flex items-center gap-3 text-sm text-slate-500">
+          <span>
+            {{ profile?.display_name ?? "Sem nome" }} ·
+            {{ isAdmin ? "admin" : "professor" }}
+          </span>
+          <AdminSignOutButton />
+        </div>
       </div>
     </header>
-    <slot />
+    <div class="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+      <slot />
+    </div>
   </div>
 </template>

@@ -37,7 +37,7 @@ async function handleSubmit() {
 
 <template>
   <form
-    class="space-y-4 rounded-lg border border-slate-300 bg-white p-4"
+    class="space-y-4 rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]"
     @submit.prevent="handleSubmit"
   >
     <div class="grid gap-3 sm:grid-cols-2">

@@ -17,7 +17,7 @@ const { data: rows, refresh } = await useFetch<ProfessorRow[]>(
 <template>
   <div class="space-y-6">
     <div>
-      <h1 class="text-xl font-bold text-slate-900">Professores</h1>
+      <h1 class="text-xl font-heading font-bold text-secondary">Professores</h1>
       <p class="text-sm text-slate-500">
         Crie o acesso do professor com e-mail e uma senha inicial — repasse
         a senha a ele e peça para trocá-la no primeiro acesso.
@@ -30,10 +30,10 @@ const { data: rows, refresh } = await useFetch<ProfessorRow[]>(
       <div
         v-for="row in rows"
         :key="row.id"
-        class="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-3"
+        class="flex items-center justify-between rounded-xl border border-accent-border/20 bg-surface p-3"
       >
         <div>
-          <p class="text-sm font-medium text-slate-900">
+          <p class="text-sm font-medium text-secondary">
             {{ row.displayName || row.email }}
           </p>
           <p class="text-xs text-slate-500">{{ row.email }}</p>

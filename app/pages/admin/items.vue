@@ -13,7 +13,7 @@ const { data: profile } = await profileAsyncData;
 <template>
   <div class="space-y-6">
     <div class="flex items-center justify-between">
-      <h1 class="text-xl font-bold text-slate-900">Itens</h1>
+      <h1 class="text-xl font-heading font-bold text-secondary">Itens</h1>
       <AdminNewItemForm
         :categories="categories ?? []"
         :default-professor-name="profile?.display_name"

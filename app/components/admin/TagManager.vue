@@ -47,8 +47,8 @@ function handleDeleteTag(tag: Tag) {
 
 <template>
   <div class="space-y-8">
-    <div class="space-y-3 rounded-lg border border-slate-300 bg-white p-4">
-      <h2 class="text-sm font-semibold text-slate-900">Nova tag</h2>
+    <div class="space-y-3 rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
+      <h2 class="text-sm font-heading font-semibold text-secondary">Nova tag</h2>
       <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto]">
         <div class="space-y-1.5">
           <UiLabel>Categoria</UiLabel>
@@ -96,7 +96,7 @@ function handleDeleteTag(tag: Tag) {
           <span
             v-for="tag in category.tags"
             :key="tag.id"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white py-1 pl-3 pr-1 text-sm"
+            class="inline-flex items-center gap-2 rounded-full border border-transparent bg-section py-1 pl-3 pr-1 text-sm text-secondary"
           >
             <SiteTagIcon :icon="tag.icon" class="h-3.5 w-3.5" />
             {{ tag.name }}

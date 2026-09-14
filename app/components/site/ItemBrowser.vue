@@ -48,14 +48,16 @@ function phaseButtonClass(active: boolean) {
     "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
     active
       ? "border-secondary bg-secondary text-white"
-      : "border-accent-border/50 bg-white text-secondary hover:bg-section",
+      : "border-transparent bg-section text-secondary hover:bg-accent-border/20",
   );
 }
 </script>
 
 <template>
-  <div class="grid gap-6 md:grid-cols-[240px_1fr]">
-    <aside class="space-y-6">
+  <div class="grid gap-6 md:grid-cols-[260px_1fr] md:items-start">
+    <aside
+      class="space-y-6 rounded-2xl border border-accent-border/20 bg-surface p-5 shadow-[0_1rem_2rem_-0.5rem_rgba(3,46,71,0.1)] md:sticky md:top-6"
+    >
       <div>
         <h2 class="mb-2 font-heading text-sm font-semibold text-secondary">
           Fase
@@ -96,7 +98,7 @@ function phaseButtonClass(active: boolean) {
                 'inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors',
                 selectedTags.has(tag.id)
                   ? 'border-secondary bg-secondary text-white'
-                  : 'border-accent-border/50 bg-white text-secondary hover:bg-section',
+                  : 'border-transparent bg-section text-secondary hover:bg-accent-border/20',
               )
             "
             @click="toggleTag(tag.id)"

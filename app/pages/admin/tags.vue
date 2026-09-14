@@ -6,7 +6,7 @@ const { data: categories } = await useTagCategories();
 
 <template>
   <div class="space-y-6">
-    <h1 class="text-xl font-bold text-slate-900">Tags</h1>
+    <h1 class="text-xl font-heading font-bold text-secondary">Tags</h1>
     <p v-if="!categories || categories.length === 0" class="text-sm text-slate-500">
       Nenhuma categoria de tag existe ainda — peça para o admin criar uma
       em "Categorias" antes de cadastrar tags.

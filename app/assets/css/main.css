@@ -17,7 +17,11 @@
 }
 
 :root {
-  --background: #ffffff;
+  /* Fundo levemente azulado em vez de branco puro — o branco sólido em
+     toda a tela deixava a UI "crua"; esse tom quase imperceptível dá
+     profundidade e faz os cards brancos se destacarem por cima. */
+  --background: #f4f9fd;
+  --surface: #ffffff;
   --foreground: #0a2540;
 
   --color-primary: #13547a;
@@ -29,6 +33,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
   --color-primary-hover: var(--color-primary-hover);

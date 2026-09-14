@@ -41,10 +41,10 @@ async function handleSubmit() {
 
 <template>
   <div
-    class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4"
+    class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)] transition-shadow hover:shadow-[0_0.5rem_1.5rem_-0.5rem_rgba(3,46,71,0.16)]"
   >
     <div>
-      <p class="font-medium text-slate-900">{{ item.name }}</p>
+      <p class="font-heading font-semibold text-secondary">{{ item.name }}</p>
       <div class="mt-1 flex flex-wrap items-center gap-1.5">
         <UiBadge variant="outline">{{ PHASE_LABELS[item.phase] }}</UiBadge>
         <UiBadge v-for="tag in item.tags" :key="tag.id">{{ tag.name }}</UiBadge>
