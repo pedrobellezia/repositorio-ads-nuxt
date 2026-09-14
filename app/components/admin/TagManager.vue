@@ -47,7 +47,7 @@ function handleDeleteTag(tag: Tag) {
 
 <template>
   <div class="space-y-8">
-    <div class="space-y-3 rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
+    <div class="space-y-3 rounded-xl border border-accent-border/40 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
       <h2 class="text-sm font-heading font-semibold text-secondary">Nova tag</h2>
       <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto]">
         <div class="space-y-1.5">
@@ -74,10 +74,7 @@ function handleDeleteTag(tag: Tag) {
         </div>
 
         <div class="flex items-end">
-          <UiButton
-            :disabled="pending || !categoryId || !name.trim()"
-            @click="handleCreate"
-          >
+          <UiButton :disabled="pending" @click="handleCreate">
             Criar tag
           </UiButton>
         </div>
@@ -88,7 +85,7 @@ function handleDeleteTag(tag: Tag) {
       <div
         v-for="category in categories"
         :key="category.id"
-        class="rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]"
+        class="rounded-xl border border-accent-border/40 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]"
       >
         <h3 class="mb-2 font-heading text-sm font-semibold text-secondary">
           {{ category.name }}

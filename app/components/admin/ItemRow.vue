@@ -41,7 +41,7 @@ async function handleSubmit() {
 
 <template>
   <div
-    class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)] transition-shadow hover:shadow-[0_0.5rem_1.5rem_-0.5rem_rgba(3,46,71,0.16)]"
+    class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent-border/40 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)] transition-shadow hover:shadow-[0_0.5rem_1.5rem_-0.5rem_rgba(3,46,71,0.16)]"
   >
     <div>
       <p class="font-heading font-semibold text-secondary">{{ item.name }}</p>

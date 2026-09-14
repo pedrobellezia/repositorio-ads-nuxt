@@ -30,7 +30,7 @@ const { data: rows, refresh } = await useFetch<ProfessorRow[]>(
       <div
         v-for="row in rows"
         :key="row.id"
-        class="flex items-center justify-between rounded-xl border border-accent-border/20 bg-surface p-3"
+        class="flex items-center justify-between rounded-xl border border-accent-border/40 bg-surface p-3"
       >
         <div>
           <p class="text-sm font-medium text-secondary">

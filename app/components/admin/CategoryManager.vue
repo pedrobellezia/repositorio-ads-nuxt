@@ -35,12 +35,12 @@ function handleDelete(category: TagCategory) {
 
 <template>
   <div class="space-y-6">
-    <div class="flex gap-2 rounded-xl border border-accent-border/20 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
+    <div class="flex gap-2 rounded-xl border border-accent-border/40 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
       <UiInput
         v-model="name"
         placeholder="Nome da categoria (ex: Tipo, Disciplina)"
       />
-      <UiButton :disabled="pending || !name.trim()" @click="handleCreate">
+      <UiButton :disabled="pending" @click="handleCreate">
         Criar categoria
       </UiButton>
     </div>
@@ -52,7 +52,7 @@ function handleDelete(category: TagCategory) {
       <div
         v-for="category in categories"
         :key="category.id"
-        class="flex items-center justify-between rounded-xl border border-accent-border/20 bg-surface p-3"
+        class="flex items-center justify-between rounded-xl border border-accent-border/40 bg-surface p-3"
       >
         <span class="text-sm font-medium text-secondary">
           {{ category.name }}

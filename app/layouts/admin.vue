@@ -9,7 +9,7 @@ const isAdmin = computed(() => profile.value?.role === "admin");
   <div class="flex min-h-full flex-1 flex-col">
     <header class="border-b border-accent-border/20 bg-surface shadow-sm">
       <div
-        class="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-4"
+        class="mx-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-4 px-4 py-4"
       >
         <div class="flex items-center gap-6">
           <NuxtLink to="/" class="flex items-center gap-2">
@@ -63,7 +63,7 @@ const isAdmin = computed(() => profile.value?.role === "admin");
         </div>
       </div>
     </header>
-    <div class="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+    <div class="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
       <slot />
     </div>
   </div>
