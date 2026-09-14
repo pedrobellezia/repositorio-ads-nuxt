@@ -15,6 +15,13 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  routeRules: {
+    // Home é pública e o catálogo muda pouco: serve do cache do Vercel e
+    // revalida em segundo plano a cada 60s, em vez de bater no Supabase
+    // a cada visita.
+    "/": { isr: 60 },
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
@@ -35,19 +42,7 @@ export default defineNuxtConfig({
           content: "Repositório de links e documentos do curso de ADS da FMP.",
         },
       ],
-      link: [
-        { rel: "icon", type: "image/png", href: "/fmp-icon.png" },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossorigin: "",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap",
-        },
-      ],
+      link: [{ rel: "icon", type: "image/png", href: "/fmp-icon.png" }],
     },
   },
 });

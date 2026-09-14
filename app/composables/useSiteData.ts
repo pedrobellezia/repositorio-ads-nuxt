@@ -12,13 +12,15 @@ export function usePublicItems() {
 
     const { data, error } = await supabase
       .from("items")
-      .select("*, item_tags(tag:tags(*))")
+      .select(
+        "id, name, description, phase, professor_name, link_url, file_path, item_tags(tag:tags(id, category_id, name, slug, icon))",
+      )
       .order("created_at", { ascending: false });
 
     if (error) throw error;
 
     return (
-      (data as (Item & { item_tags: { tag: Tag }[] })[] | null) ?? []
+      (data as unknown as (Item & { item_tags: { tag: Tag }[] })[] | null) ?? []
     ).map((row) => {
       const { item_tags, ...item } = row;
       return { ...item, tags: item_tags.map((it) => it.tag) };
@@ -38,10 +40,12 @@ export function useTagCategories() {
 
     const { data, error } = await supabase
       .from("tag_categories")
-      .select("*, tags(*)")
+      .select(
+        "id, name, slug, tags(id, category_id, name, slug, icon)",
+      )
       .order("name");
 
     if (error) throw error;
-    return (data as CategoryWithTags[] | null) ?? [];
+    return (data as unknown as CategoryWithTags[] | null) ?? [];
   });
 }
