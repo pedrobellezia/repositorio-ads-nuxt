@@ -13,10 +13,6 @@ const props = defineProps<{
 const phase = ref<Phase | "todas">("todas");
 const selectedTags = reactive(new Set<string>());
 
-const usedPhases = computed(() =>
-  PHASES.filter((p) => props.items.some((item) => item.phase === p)),
-);
-
 function toggleTag(tagId: string) {
   if (selectedTags.has(tagId)) selectedTags.delete(tagId);
   else selectedTags.add(tagId);
@@ -72,7 +68,7 @@ function phaseButtonClass(active: boolean) {
             Todas
           </button>
           <button
-            v-for="p in usedPhases"
+            v-for="p in PHASES"
             :key="p"
             :class="phaseButtonClass(phase === p)"
             :style="

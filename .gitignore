@@ -22,3 +22,8 @@ logs
 .env
 .env.*
 !.env.example
+.vercel
+.env*
+
+# Supabase CLI local state
+supabase/.temp
