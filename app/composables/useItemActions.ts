@@ -65,7 +65,7 @@ export function useItemActions() {
         professor_name: values.professor_name.trim() || null,
         link_url: linkUrl,
         file_path: filePath,
-        created_by: user.value?.id ?? null,
+        created_by: user.value?.sub ?? null,
       })
       .select("id")
       .single();

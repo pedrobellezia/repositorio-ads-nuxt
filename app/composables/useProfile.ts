@@ -12,7 +12,7 @@ export function useProfile() {
       const { data } = await supabase
         .from("profiles")
         .select("id, role, display_name")
-        .eq("id", user.value.id)
+        .eq("id", user.value.sub)
         .single();
 
       return data as Profile | null;

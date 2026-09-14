@@ -33,7 +33,7 @@ export function useTagActions() {
       name: name.trim(),
       slug: slugify(name),
       icon,
-      created_by: user.value?.id ?? null,
+      created_by: user.value?.sub ?? null,
     });
 
     if (error) throw error;
