@@ -1,8 +1,21 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { cn } from "@/lib/utils";
 
 const { data: profile } = useProfile();
 const isAdmin = computed(() => profile.value?.role === "admin");
+
+const route = useRoute();
+
+function navLinkClass(path: string) {
+  const active = route.path.startsWith(path);
+  return cn(
+    "rounded-full px-3 py-1.5 transition-colors",
+    active
+      ? "bg-white text-secondary hover:bg-white hover:text-secondary"
+      : "text-white/85 hover:bg-white/15 hover:text-white",
+  );
+}
 </script>
 
 <template>
@@ -31,32 +44,22 @@ const isAdmin = computed(() => profile.value?.role === "admin");
             />
           </NuxtLink>
           <nav class="flex gap-1 font-heading text-sm font-medium">
-            <NuxtLink
-              to="/admin/items"
-              class="rounded-full px-3 py-1.5 text-white/85 transition-colors hover:bg-white/15 hover:text-white"
-              active-class="bg-white text-secondary hover:bg-white hover:text-secondary"
-            >
+            <NuxtLink to="/admin/items" :class="navLinkClass('/admin/items')">
               Itens
             </NuxtLink>
-            <NuxtLink
-              to="/admin/tags"
-              class="rounded-full px-3 py-1.5 text-white/85 transition-colors hover:bg-white/15 hover:text-white"
-              active-class="bg-white text-secondary hover:bg-white hover:text-secondary"
-            >
+            <NuxtLink to="/admin/tags" :class="navLinkClass('/admin/tags')">
               Tags
             </NuxtLink>
             <template v-if="isAdmin">
               <NuxtLink
                 to="/admin/categories"
-                class="rounded-full px-3 py-1.5 text-white/85 transition-colors hover:bg-white/15 hover:text-white"
-                active-class="bg-white text-secondary hover:bg-white hover:text-secondary"
+                :class="navLinkClass('/admin/categories')"
               >
                 Categorias
               </NuxtLink>
               <NuxtLink
                 to="/admin/professors"
-                class="rounded-full px-3 py-1.5 text-white/85 transition-colors hover:bg-white/15 hover:text-white"
-                active-class="bg-white text-secondary hover:bg-white hover:text-secondary"
+                :class="navLinkClass('/admin/professors')"
               >
                 Professores
               </NuxtLink>
