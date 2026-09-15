@@ -21,13 +21,15 @@ function navLinkClass(path: string) {
 <template>
   <div class="flex min-h-full flex-1 flex-col">
     <header
-      class="px-4 pb-8 pt-4 text-white"
+      class="px-4 pb-14 pt-4 text-white"
       style="
         background-image: linear-gradient(
-          15deg,
-          rgba(19, 84, 122, 0.7) 0%,
-          #13547a 100%
-        );
+            to bottom,
+            transparent 0%,
+            transparent 70%,
+            var(--background) 100%
+          ),
+          linear-gradient(15deg, rgba(19, 84, 122, 0.7) 0%, #13547a 100%);
       "
     >
       <div class="mx-auto flex w-full max-w-3xl justify-end gap-3 text-sm text-white/80">
@@ -38,13 +40,13 @@ function navLinkClass(path: string) {
         <AdminSignOutButton class="text-white hover:bg-white/15 hover:text-white" />
       </div>
       <div class="mx-auto mt-2 flex w-full max-w-3xl flex-col items-center gap-3 text-center">
-        <NuxtLink to="/" class="rounded-xl bg-white px-5 py-3 shadow-lg">
+        <NuxtLink to="/">
           <img
-            src="/fmp-logo.png"
-            alt="FMP — Faculdade Municipal de Palhoça"
-            width="150"
-            height="30"
-            class="h-10 w-auto sm:h-12"
+            src="/ads-logo-white.png"
+            alt="ADS — Análise e Desenvolvimento de Sistemas"
+            width="450"
+            height="125"
+            class="h-12 w-auto drop-shadow-md sm:h-14"
           />
         </NuxtLink>
         <h1 class="font-heading text-2xl font-bold sm:text-3xl">
@@ -53,13 +55,7 @@ function navLinkClass(path: string) {
       </div>
     </header>
 
-    <!-- transição suave do azul do header pro fundo claro da pagina -->
-    <div
-      class="h-8"
-      style="background-image: linear-gradient(to bottom, #13547a, var(--background))"
-    />
-
-    <nav class="mx-auto -mt-4 w-full max-w-3xl px-4 font-heading text-sm font-medium">
+    <nav class="mx-auto -mt-10 w-full max-w-3xl px-4 font-heading text-sm font-medium">
       <div class="flex flex-wrap gap-1.5 rounded-2xl border border-accent-border/40 bg-surface p-2 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
         <NuxtLink to="/admin/items" :class="navLinkClass('/admin/items')">
           Itens
