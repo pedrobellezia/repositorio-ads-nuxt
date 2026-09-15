@@ -4,7 +4,9 @@ import type { Phase, Tag } from "@/lib/types";
 
 const props = defineProps<{
   tags: Tag[];
-  defaultProfessorName?: string | null;
+  // Preenchido automaticamente com o professor logado; fica vazio (item
+  // geral) quando quem cria é admin. Não é editável na criação.
+  professorName?: string | null;
 }>();
 
 const { createItem } = useItemActions();
@@ -17,7 +19,7 @@ function emptyForm() {
     name: "",
     description: "",
     phase: "geral" as Phase,
-    professor_name: props.defaultProfessorName ?? "",
+    professor_name: props.professorName ?? "",
     link_url: "",
   };
 }
@@ -59,6 +61,7 @@ async function handleSubmit() {
         v-model:form="form"
         v-model:tag-ids="tagIds"
         :tags="tags"
+        hide-professor-field
         @file-change="(f) => (file = f)"
       />
       <div class="mt-6 flex justify-end gap-2">

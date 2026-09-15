@@ -16,7 +16,7 @@ const { data: profile } = await profileAsyncData;
       <h1 class="text-xl font-heading font-bold text-secondary">Itens</h1>
       <AdminNewItemForm
         :tags="tags ?? []"
-        :default-professor-name="profile?.display_name"
+        :professor-name="profile?.role === 'professor' ? profile.display_name : null"
       />
     </div>
 

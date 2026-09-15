@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 defineProps<{
   tags: Tag[];
   hasExistingFile?: boolean;
+  hideProfessorField?: boolean;
 }>();
 
 const emit = defineEmits<{ "file-change": [file: File | null] }>();
@@ -58,7 +59,7 @@ function toggleTag(tagId: string) {
       </select>
     </div>
 
-    <div class="space-y-1.5">
+    <div v-if="!hideProfessorField" class="space-y-1.5">
       <UiLabel for="professor_name">Professor(a)</UiLabel>
       <UiInput
         id="professor_name"
