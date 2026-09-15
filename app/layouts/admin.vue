@@ -21,7 +21,7 @@ function navLinkClass(path: string) {
 <template>
   <div class="flex min-h-full flex-1 flex-col">
     <header
-      class="px-4 pb-14 pt-4 text-white"
+      class="px-4 pb-16 pt-6 text-white"
       style="
         background-image: linear-gradient(
             to bottom,
@@ -46,10 +46,10 @@ function navLinkClass(path: string) {
             alt="ADS — Análise e Desenvolvimento de Sistemas"
             width="450"
             height="125"
-            class="h-12 w-auto drop-shadow-md sm:h-14"
+            class="h-16 w-auto drop-shadow-md sm:h-24"
           />
         </NuxtLink>
-        <h1 class="font-heading text-2xl font-bold sm:text-3xl">
+        <h1 class="font-heading text-4xl font-bold sm:text-5xl">
           Repositório Acadêmico
         </h1>
       </div>
