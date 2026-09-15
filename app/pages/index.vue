@@ -27,13 +27,15 @@ const { data: categories } = await categoriesAsyncData;
         </NuxtLink>
       </div>
       <div class="mx-auto mt-4 flex w-full max-w-6xl flex-col items-center gap-4 text-center">
-        <img
-          src="/ads-logo-white.png"
-          alt="ADS — Análise e Desenvolvimento de Sistemas"
-          width="450"
-          height="125"
-          class="h-16 w-auto drop-shadow-md sm:h-24"
-        />
+        <div class="rounded-2xl bg-white px-6 py-4 shadow-lg">
+          <img
+            src="/ads-logo-color.png"
+            alt="ADS — Análise e Desenvolvimento de Sistemas"
+            width="450"
+            height="125"
+            class="h-14 w-auto sm:h-20"
+          />
+        </div>
         <h1 class="font-heading text-4xl font-bold sm:text-5xl">
           Repositório Acadêmico
         </h1>
