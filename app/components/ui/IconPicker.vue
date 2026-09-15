@@ -35,11 +35,21 @@ const options = computed(() =>
 
 <template>
   <div :class="cn('space-y-2', $props.class)">
-    <UiInput
-      v-model="query"
-      type="search"
-      placeholder="Buscar outro ícone..."
-    />
+    <div class="flex items-center justify-between gap-2">
+      <UiInput
+        v-model="query"
+        type="search"
+        placeholder="Buscar outro ícone..."
+      />
+      <a
+        href="https://lucide.dev/icons/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shrink-0 text-xs text-secondary underline underline-offset-2 hover:text-secondary/80"
+      >
+        Ver todos os ícones
+      </a>
+    </div>
 
     <div class="flex flex-wrap gap-1.5">
       <button
