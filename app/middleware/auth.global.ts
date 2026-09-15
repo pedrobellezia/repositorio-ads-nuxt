@@ -6,9 +6,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return navigateTo({ path: "/login", query: { next: to.fullPath } });
   }
 
-  const isAdminOnlyRoute =
-    to.path.startsWith("/admin/categories") ||
-    to.path.startsWith("/admin/professors");
+  const isAdminOnlyRoute = to.path.startsWith("/admin/professors");
 
   if (isAdminOnlyRoute && user.value) {
     const supabase = useSupabaseClient<any>();

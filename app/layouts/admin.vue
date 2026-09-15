@@ -64,20 +64,13 @@ function navLinkClass(path: string) {
         <NuxtLink to="/admin/tags" :class="navLinkClass('/admin/tags')">
           Tags
         </NuxtLink>
-        <template v-if="isAdmin">
-          <NuxtLink
-            to="/admin/categories"
-            :class="navLinkClass('/admin/categories')"
-          >
-            Categorias
-          </NuxtLink>
-          <NuxtLink
-            to="/admin/professors"
-            :class="navLinkClass('/admin/professors')"
-          >
-            Professores
-          </NuxtLink>
-        </template>
+        <NuxtLink
+          v-if="isAdmin"
+          to="/admin/professors"
+          :class="navLinkClass('/admin/professors')"
+        >
+          Professores
+        </NuxtLink>
       </div>
     </nav>
 
