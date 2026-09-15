@@ -21,15 +21,14 @@ function navLinkClass(path: string) {
 <template>
   <div class="flex min-h-full flex-1 flex-col">
     <header
-      class="px-4 pb-16 pt-6 text-white"
+      class="bg-secondary px-4 pb-16 pt-6 text-white"
       style="
         background-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            transparent 70%,
-            var(--background) 100%
-          ),
-          linear-gradient(15deg, rgba(19, 84, 122, 0.7) 0%, #13547a 100%);
+          to bottom,
+          transparent 0%,
+          transparent 70%,
+          var(--background) 100%
+        );
       "
     >
       <div class="mx-auto flex w-full max-w-3xl justify-end gap-3 text-sm text-white/80">
