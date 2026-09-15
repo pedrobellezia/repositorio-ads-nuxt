@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const itemsAsyncData = usePublicItems();
-const categoriesAsyncData = useTagCategories();
+const tagsAsyncData = useTags();
 
 const { data: items } = await itemsAsyncData;
-const { data: categories } = await categoriesAsyncData;
+const { data: tags } = await tagsAsyncData;
 </script>
 
 <template>
@@ -45,7 +45,7 @@ const { data: categories } = await categoriesAsyncData;
     </header>
 
     <div class="mx-auto w-full max-w-6xl px-4 py-10">
-      <SiteItemBrowser :items="items ?? []" :categories="categories ?? []" />
+      <SiteItemBrowser :items="items ?? []" :tags="tags ?? []" />
     </div>
   </div>
 </template>

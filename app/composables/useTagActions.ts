@@ -14,12 +14,8 @@ export function useTagActions() {
   const supabase = useSupabaseClient<any>();
   const user = useSupabaseUser();
 
-  async function searchSimilarTags(
-    categoryId: string,
-    name: string,
-  ): Promise<SimilarTag[]> {
+  async function searchSimilarTags(name: string): Promise<SimilarTag[]> {
     const { data, error } = await supabase.rpc("search_similar_tags", {
-      p_category_id: categoryId,
       p_name: name,
     });
 
@@ -27,9 +23,8 @@ export function useTagActions() {
     return data ?? [];
   }
 
-  async function createTag(categoryId: string, name: string, icon: string) {
+  async function createTag(name: string, icon: string) {
     const { error } = await supabase.from("tags").insert({
-      category_id: categoryId,
       name: name.trim(),
       slug: slugify(name),
       icon,
@@ -37,13 +32,13 @@ export function useTagActions() {
     });
 
     if (error) throw error;
-    await refreshNuxtData(["tag-categories"]);
+    await refreshNuxtData(["tags"]);
   }
 
   async function deleteTag(tagId: string) {
     const { error } = await supabase.from("tags").delete().eq("id", tagId);
     if (error) throw error;
-    await refreshNuxtData(["tag-categories"]);
+    await refreshNuxtData(["tags"]);
   }
 
   return { searchSimilarTags, createTag, deleteTag };

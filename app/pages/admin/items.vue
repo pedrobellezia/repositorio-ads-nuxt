@@ -2,11 +2,11 @@
 definePageMeta({ layout: "admin" });
 
 const itemsAsyncData = usePublicItems();
-const categoriesAsyncData = useTagCategories();
+const tagsAsyncData = useTags();
 const profileAsyncData = useProfile();
 
 const { data: items } = await itemsAsyncData;
-const { data: categories } = await categoriesAsyncData;
+const { data: tags } = await tagsAsyncData;
 const { data: profile } = await profileAsyncData;
 </script>
 
@@ -15,7 +15,7 @@ const { data: profile } = await profileAsyncData;
     <div class="flex items-center justify-between">
       <h1 class="text-xl font-heading font-bold text-secondary">Itens</h1>
       <AdminNewItemForm
-        :categories="categories ?? []"
+        :tags="tags ?? []"
         :default-professor-name="profile?.display_name"
       />
     </div>
@@ -28,7 +28,7 @@ const { data: profile } = await profileAsyncData;
         v-for="item in items"
         :key="item.id"
         :item="item"
-        :categories="categories ?? []"
+        :tags="tags ?? []"
       />
     </div>
   </div>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import type { CategoryWithTags, Phase } from "@/lib/types";
+import type { Phase, Tag } from "@/lib/types";
 
 const props = defineProps<{
-  categories: CategoryWithTags[];
+  tags: Tag[];
   defaultProfessorName?: string | null;
 }>();
 
@@ -58,7 +58,7 @@ async function handleSubmit() {
       <AdminItemFormFields
         v-model:form="form"
         v-model:tag-ids="tagIds"
-        :categories="categories"
+        :tags="tags"
         @file-change="(f) => (file = f)"
       />
       <div class="mt-6 flex justify-end gap-2">

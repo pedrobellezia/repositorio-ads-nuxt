@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { PHASE_LABELS, PHASES } from "@/lib/types";
-import type { CategoryWithTags } from "@/lib/types";
+import type { Tag } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 defineProps<{
-  categories: CategoryWithTags[];
+  tags: Tag[];
   hasExistingFile?: boolean;
 }>();
 
@@ -90,38 +90,29 @@ function toggleTag(tagId: string) {
       />
     </div>
 
-    <div class="space-y-3 sm:col-span-2">
+    <div class="space-y-1.5 sm:col-span-2">
       <UiLabel>Tags</UiLabel>
-      <p v-if="categories.length === 0" class="text-xs text-slate-500">
-        Nenhuma categoria de tag cadastrada ainda.
+      <p v-if="tags.length === 0" class="text-xs text-slate-500">
+        Nenhuma tag cadastrada ainda.
       </p>
-      <div class="space-y-3">
-        <div v-for="category in categories" :key="category.id">
-          <p
-            class="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400"
-          >
-            {{ category.name }}
-          </p>
-          <div class="flex flex-wrap gap-2">
-            <button
-              v-for="tag in category.tags"
-              :key="tag.id"
-              type="button"
-              :class="
-                cn(
-                  'inline-flex items-center gap-1.5 rounded-full border border-accent-border/50 px-3 py-1 text-xs font-medium transition-colors',
-                  tagIds.has(tag.id)
-                    ? 'border-secondary bg-secondary text-white hover:bg-primary'
-                    : 'bg-white text-secondary hover:bg-section',
-                )
-              "
-              @click="toggleTag(tag.id)"
-            >
-              <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
-              {{ tag.name }}
-            </button>
-          </div>
-        </div>
+      <div v-else class="flex flex-wrap gap-2">
+        <button
+          v-for="tag in tags"
+          :key="tag.id"
+          type="button"
+          :class="
+            cn(
+              'inline-flex items-center gap-1.5 rounded-full border border-accent-border/50 px-3 py-1 text-xs font-medium transition-colors',
+              tagIds.has(tag.id)
+                ? 'border-secondary bg-secondary text-white hover:bg-primary'
+                : 'bg-white text-secondary hover:bg-section',
+            )
+          "
+          @click="toggleTag(tag.id)"
+        >
+          <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
+          {{ tag.name }}
+        </button>
       </div>
     </div>
   </div>

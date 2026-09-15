@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { PHASE_LABELS } from "@/lib/types";
-import type { CategoryWithTags, ItemWithTags } from "@/lib/types";
+import type { ItemWithTags, Tag } from "@/lib/types";
 
 const props = defineProps<{
   item: ItemWithTags;
-  categories: CategoryWithTags[];
+  tags: Tag[];
 }>();
 
 const { updateItem } = useItemActions();
@@ -63,7 +63,7 @@ async function handleSubmit() {
         <AdminItemFormFields
           v-model:form="form"
           v-model:tag-ids="tagIds"
-          :categories="categories"
+          :tags="tags"
           :has-existing-file="!!item.file_path"
           @file-change="(f) => (file = f)"
         />

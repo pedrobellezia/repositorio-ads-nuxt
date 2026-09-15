@@ -1,15 +1,11 @@
 -- Dados migrados do repositório antigo (js/arquivos.js), restritos aos
 -- itens relevantes para o curso de ADS.
 
-insert into public.tag_categories (id, name, slug)
-values ('00000000-0000-0000-0000-000000000001', 'Tipo', 'tipo')
-on conflict (slug) do nothing;
-
-insert into public.tags (id, category_id, name, slug, icon)
+insert into public.tags (id, name, slug, icon)
 values
-  ('00000000-0000-0000-0000-000000000101', '00000000-0000-0000-0000-000000000001', 'IDE', 'ide', 'code'),
-  ('00000000-0000-0000-0000-000000000102', '00000000-0000-0000-0000-000000000001', 'Analisador de Rede', 'analisador-de-rede', 'network')
-on conflict (category_id, slug) do nothing;
+  ('00000000-0000-0000-0000-000000000101', 'IDE', 'ide', 'code'),
+  ('00000000-0000-0000-0000-000000000102', 'Analisador de Rede', 'analisador-de-rede', 'network')
+on conflict (slug) do nothing;
 
 insert into public.items (id, name, description, phase, professor_name, link_url)
 values

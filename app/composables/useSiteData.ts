@@ -1,4 +1,4 @@
-import type { CategoryWithTags, Item, ItemWithTags, Tag } from "@/lib/types";
+import type { Item, ItemWithTags, Tag } from "@/lib/types";
 
 export function usePublicItems() {
   const supabase = useSupabaseClient<any>();
@@ -13,7 +13,7 @@ export function usePublicItems() {
     const { data, error } = await supabase
       .from("items")
       .select(
-        "id, name, description, phase, professor_name, link_url, file_path, item_tags(tag:tags(id, category_id, name, slug, icon))",
+        "id, name, description, phase, professor_name, link_url, file_path, item_tags(tag:tags(id, name, slug, icon))",
       )
       .order("created_at", { ascending: false });
 
@@ -28,24 +28,22 @@ export function usePublicItems() {
   });
 }
 
-export function useTagCategories() {
+export function useTags() {
   const supabase = useSupabaseClient<any>();
   const config = useRuntimeConfig();
 
-  return useAsyncData<CategoryWithTags[]>("tag-categories", async () => {
+  return useAsyncData<Tag[]>("tags", async () => {
     if (config.public.mockTrue) {
-      const { mockCategories } = await import("~~/server/mock-data");
-      return mockCategories;
+      const { mockTags } = await import("~~/server/mock-data");
+      return mockTags;
     }
 
     const { data, error } = await supabase
-      .from("tag_categories")
-      .select(
-        "id, name, slug, tags(id, category_id, name, slug, icon)",
-      )
+      .from("tags")
+      .select("id, name, slug, icon")
       .order("name");
 
     if (error) throw error;
-    return (data as unknown as CategoryWithTags[] | null) ?? [];
+    return (data as unknown as Tag[] | null) ?? [];
   });
 }

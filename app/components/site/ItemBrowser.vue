@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
 import { PHASE_LABELS, PHASES, type Phase } from "@/lib/types";
-import type { CategoryWithTags, ItemWithTags } from "@/lib/types";
+import type { ItemWithTags, Tag } from "@/lib/types";
 import { PHASE_COLORS } from "@/lib/phase-colors";
 import { cn } from "@/lib/utils";
 
 const props = defineProps<{
   items: ItemWithTags[];
-  categories: CategoryWithTags[];
+  tags: Tag[];
 }>();
 
 const phase = ref<Phase | "todas">("todas");
@@ -26,20 +26,9 @@ const filteredItems = computed(() => {
   return props.items.filter((item) => {
     if (phase.value !== "todas" && item.phase !== phase.value) return false;
 
-    for (const category of props.categories) {
-      const selectedInCategory = category.tags
-        .map((t) => t.id)
-        .filter((id) => selectedTags.has(id));
+    if (selectedTags.size === 0) return true;
 
-      if (selectedInCategory.length === 0) continue;
-
-      const hasMatch = item.tags.some((tag) =>
-        selectedInCategory.includes(tag.id),
-      );
-      if (!hasMatch) return false;
-    }
-
-    return true;
+    return item.tags.some((tag) => selectedTags.has(tag.id));
   });
 });
 
@@ -85,13 +74,13 @@ function phaseButtonClass(active: boolean) {
         </div>
       </div>
 
-      <div v-for="category in categories" :key="category.id">
+      <div v-if="tags.length > 0">
         <h2 class="mb-2 font-heading text-sm font-semibold text-secondary">
-          {{ category.name }}
+          Tags
         </h2>
         <div class="flex flex-wrap gap-1.5 md:flex-col md:items-start">
           <button
-            v-for="tag in category.tags"
+            v-for="tag in tags"
             :key="tag.id"
             :class="
               cn(

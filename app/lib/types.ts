@@ -26,16 +26,8 @@ export type Profile = {
   display_name: string | null;
 };
 
-export type TagCategory = {
-  id: string;
-  name: string;
-  slug: string;
-  created_at: string;
-};
-
 export type Tag = {
   id: string;
-  category_id: string;
   name: string;
   slug: string;
   icon: string | null;
@@ -65,5 +57,3 @@ export type SimilarTag = {
   name: string;
   similarity: number;
 };
-
-export type CategoryWithTags = TagCategory & { tags: Tag[] };

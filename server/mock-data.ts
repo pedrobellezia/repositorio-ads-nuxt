@@ -1,8 +1,7 @@
-import type { CategoryWithTags, ItemWithTags, Tag } from "@/lib/types";
+import type { ItemWithTags, Tag } from "@/lib/types";
 
 const tagLinguagens: Tag = {
   id: "tag-1",
-  category_id: "cat-1",
   name: "JavaScript",
   slug: "javascript",
   icon: null,
@@ -12,7 +11,6 @@ const tagLinguagens: Tag = {
 
 const tagBanco: Tag = {
   id: "tag-2",
-  category_id: "cat-2",
   name: "SQL",
   slug: "sql",
   icon: null,
@@ -22,7 +20,6 @@ const tagBanco: Tag = {
 
 const tagRedes: Tag = {
   id: "tag-3",
-  category_id: "cat-3",
   name: "TCP/IP",
   slug: "tcp-ip",
   icon: null,
@@ -72,26 +69,4 @@ export const mockItems: ItemWithTags[] = [
   },
 ];
 
-export const mockCategories: CategoryWithTags[] = [
-  {
-    id: "cat-1",
-    name: "Linguagens",
-    slug: "linguagens",
-    created_at: "2026-01-01T12:00:00.000Z",
-    tags: [tagLinguagens],
-  },
-  {
-    id: "cat-2",
-    name: "Banco de dados",
-    slug: "banco-de-dados",
-    created_at: "2026-01-01T12:00:00.000Z",
-    tags: [tagBanco],
-  },
-  {
-    id: "cat-3",
-    name: "Redes",
-    slug: "redes",
-    created_at: "2026-01-01T12:00:00.000Z",
-    tags: [tagRedes],
-  },
-];
+export const mockTags: Tag[] = [tagLinguagens, tagBanco, tagRedes];
