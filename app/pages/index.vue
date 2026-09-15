@@ -8,7 +8,16 @@ const { data: categories } = await categoriesAsyncData;
 
 <template>
   <div class="flex-1">
-    <header class="bg-secondary px-4 pb-10 pt-6 text-white">
+    <header
+      class="px-4 pb-10 pt-6 text-white"
+      style="
+        background-image: linear-gradient(
+          15deg,
+          rgba(19, 84, 122, 0.7) 0%,
+          #13547a 100%
+        );
+      "
+    >
       <div class="mx-auto flex w-full max-w-6xl justify-end">
         <NuxtLink
           to="/login"
