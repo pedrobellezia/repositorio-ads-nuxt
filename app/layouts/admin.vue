@@ -30,12 +30,11 @@ function navLinkClass(path: string) {
         );
       "
     >
-      <div class="mx-auto flex w-full max-w-3xl justify-end gap-3 text-sm text-white/80">
-        <span>
-          {{ profile?.display_name ?? "Sem nome" }} ·
-          {{ isAdmin ? "admin" : "professor" }}
-        </span>
-        <AdminSignOutButton class="text-white hover:bg-white/15 hover:text-white" />
+      <div class="mx-auto flex w-full max-w-3xl justify-end">
+        <AdminUserMenu
+          :display-name="profile?.display_name ?? 'Sem nome'"
+          :role-label="isAdmin ? 'admin' : 'professor'"
+        />
       </div>
       <div class="mx-auto mt-2 flex w-full max-w-3xl flex-col items-center gap-3 text-center">
         <NuxtLink to="/">
