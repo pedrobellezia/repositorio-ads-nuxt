@@ -49,7 +49,7 @@ function handleDeleteTag(tag: Tag) {
   <div class="space-y-8">
     <div class="space-y-3 rounded-xl border border-accent-border/40 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
       <h2 class="text-sm font-heading font-semibold text-secondary">Nova tag</h2>
-      <div class="grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto]">
+      <div class="grid gap-3 sm:grid-cols-2">
         <div class="space-y-1.5">
           <UiLabel>Categoria</UiLabel>
           <UiSelect v-model="categoryId">
@@ -63,22 +63,16 @@ function handleDeleteTag(tag: Tag) {
           <UiLabel>Nome</UiLabel>
           <UiInput v-model="name" />
         </div>
-
-        <div class="space-y-1.5">
-          <UiLabel>Ícone</UiLabel>
-          <UiSelect v-model="icon" class="w-28">
-            <option v-for="opt in TAG_ICON_OPTIONS" :key="opt" :value="opt">
-              {{ opt }}
-            </option>
-          </UiSelect>
-        </div>
-
-        <div class="flex items-end">
-          <UiButton :disabled="pending" @click="handleCreate">
-            Criar tag
-          </UiButton>
-        </div>
       </div>
+
+      <div class="space-y-1.5">
+        <UiLabel>Ícone</UiLabel>
+        <UiIconPicker v-model="icon" />
+      </div>
+
+      <UiButton :disabled="pending" @click="handleCreate">
+        Criar tag
+      </UiButton>
     </div>
 
     <div class="space-y-4">
