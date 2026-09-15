@@ -40,13 +40,13 @@ function navLinkClass(path: string) {
         <AdminSignOutButton class="text-white hover:bg-white/15 hover:text-white" />
       </div>
       <div class="mx-auto mt-2 flex w-full max-w-3xl flex-col items-center gap-3 text-center">
-        <NuxtLink to="/" class="rounded-xl bg-white px-5 py-3 shadow-lg">
+        <NuxtLink to="/">
           <img
-            src="/ads-logo-color.png"
+            src="/ads-logo-white.png"
             alt="ADS — Análise e Desenvolvimento de Sistemas"
             width="450"
             height="125"
-            class="h-10 w-auto sm:h-12"
+            class="h-12 w-auto drop-shadow-md sm:h-14"
           />
         </NuxtLink>
         <h1 class="font-heading text-2xl font-bold sm:text-3xl">
