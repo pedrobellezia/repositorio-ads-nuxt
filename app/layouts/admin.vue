@@ -42,7 +42,7 @@ function navLinkClass(path: string) {
       <div class="mx-auto mt-2 flex w-full max-w-3xl flex-col items-center gap-3 text-center">
         <NuxtLink to="/">
           <img
-            src="/ads-logo-white.png"
+            src="/ads-logo-color.png"
             alt="ADS — Análise e Desenvolvimento de Sistemas"
             width="450"
             height="125"

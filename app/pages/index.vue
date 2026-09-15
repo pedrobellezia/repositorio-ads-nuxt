@@ -28,7 +28,7 @@ const { data: categories } = await categoriesAsyncData;
       </div>
       <div class="mx-auto mt-4 flex w-full max-w-6xl flex-col items-center gap-4 text-center">
         <img
-          src="/ads-logo-white.png"
+          src="/ads-logo-color.png"
           alt="ADS — Análise e Desenvolvimento de Sistemas"
           width="450"
           height="125"
