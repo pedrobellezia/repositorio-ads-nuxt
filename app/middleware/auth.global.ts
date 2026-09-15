@@ -1,12 +1,16 @@
+const PROTECTED_ROUTES = ["/items", "/tags", "/professores"];
+
 export default defineNuxtRouteMiddleware(async (to) => {
   const user = useSupabaseUser();
-  const isAdminRoute = to.path.startsWith("/admin");
+  const isProtectedRoute = PROTECTED_ROUTES.some((path) =>
+    to.path.startsWith(path),
+  );
 
-  if (isAdminRoute && !user.value) {
+  if (isProtectedRoute && !user.value) {
     return navigateTo({ path: "/login", query: { next: to.fullPath } });
   }
 
-  const isAdminOnlyRoute = to.path.startsWith("/admin/professors");
+  const isAdminOnlyRoute = to.path.startsWith("/professores");
 
   if (isAdminOnlyRoute && user.value) {
     const supabase = useSupabaseClient<any>();
@@ -17,7 +21,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
       .single();
 
     if (profile?.role !== "admin") {
-      return navigateTo({ path: "/admin", query: { error: "acesso-restrito" } });
+      return navigateTo({ path: "/items", query: { error: "acesso-restrito" } });
     }
   }
 });

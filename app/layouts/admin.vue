@@ -58,16 +58,16 @@ function navLinkClass(path: string) {
 
     <nav class="mx-auto -mt-10 w-full max-w-3xl px-4 font-heading text-sm font-medium">
       <div class="flex flex-wrap gap-1.5 rounded-2xl border border-accent-border/40 bg-surface p-2 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]">
-        <NuxtLink to="/admin/items" :class="navLinkClass('/admin/items')">
+        <NuxtLink to="/items" :class="navLinkClass('/items')">
           Itens
         </NuxtLink>
-        <NuxtLink to="/admin/tags" :class="navLinkClass('/admin/tags')">
+        <NuxtLink to="/tags" :class="navLinkClass('/tags')">
           Tags
         </NuxtLink>
         <NuxtLink
           v-if="isAdmin"
-          to="/admin/professors"
-          :class="navLinkClass('/admin/professors')"
+          to="/professores"
+          :class="navLinkClass('/professores')"
         >
           Professores
         </NuxtLink>

@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
-const router = useRouter();
-const supabase = useSupabaseClient();
 
-const next = (route.query.next as string) ?? "/admin";
+const next = route.query.next as string | undefined;
 
 const email = ref("");
 const password = ref("");
@@ -15,18 +13,22 @@ const status = ref<"idle" | "sending" | "error">("idle");
 async function handleSubmit() {
   status.value = "sending";
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email: email.value,
-    password: password.value,
-  });
+  try {
+    const { redirectTo } = await $fetch<{ redirectTo: string }>(
+      "/api/auth/login",
+      {
+        method: "POST",
+        body: { email: email.value, password: password.value, next },
+      },
+    );
 
-  if (error) {
+    // Navegação full-page (não router.push): garante que o cookie de sessão
+    // recém-gravado pelo server já esteja presente quando o middleware
+    // rodar na próxima página, evitando o loop de volta pro /login.
+    window.location.href = redirectTo;
+  } catch {
     status.value = "error";
-    return;
   }
-
-  status.value = "idle";
-  await router.push(next);
 }
 </script>
 
