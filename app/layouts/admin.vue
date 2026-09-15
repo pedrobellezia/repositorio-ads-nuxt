@@ -52,6 +52,10 @@ function navLinkClass(path: string) {
         <h1 class="font-heading text-4xl font-bold sm:text-5xl">
           Repositório Acadêmico
         </h1>
+        <p class="max-w-2xl text-sm text-white/85 sm:text-base">
+          Links e documentos do curso de ADS organizados por fase e por
+          tags, centralizados para estudantes e professores.
+        </p>
       </div>
     </header>
 
