@@ -5,10 +5,17 @@ const { changePassword } = useAccountActions();
 
 const currentPassword = ref("");
 const newPassword = ref("");
+const confirmPassword = ref("");
 const status = ref<"idle" | "saving" | "saved" | "error">("idle");
 const errorMessage = ref("");
 
 async function handleSubmit() {
+  if (newPassword.value !== confirmPassword.value) {
+    errorMessage.value = "As senhas não coincidem.";
+    status.value = "error";
+    return;
+  }
+
   status.value = "saving";
 
   try {
@@ -16,6 +23,7 @@ async function handleSubmit() {
     status.value = "saved";
     currentPassword.value = "";
     newPassword.value = "";
+    confirmPassword.value = "";
   } catch (err) {
     const data = (err as { data?: { statusMessage?: string } })?.data;
     errorMessage.value = data?.statusMessage ?? "Erro ao trocar a senha.";
@@ -41,6 +49,17 @@ async function handleSubmit() {
       <UiInput
         id="new-password"
         v-model="newPassword"
+        type="password"
+        required
+        minlength="6"
+      />
+    </div>
+
+    <div class="space-y-1.5">
+      <UiLabel for="confirm-password">Confirmar nova senha</UiLabel>
+      <UiInput
+        id="confirm-password"
+        v-model="confirmPassword"
         type="password"
         required
         minlength="6"

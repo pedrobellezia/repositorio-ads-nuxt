@@ -6,10 +6,17 @@ const props = defineProps<{
 }>();
 
 const { deleteItem } = useItemActions();
+const { confirmDialog } = useDialog();
 const pending = ref(false);
 
 async function handleDelete() {
-  if (!confirm("Excluir este item? Essa ação não pode ser desfeita.")) return;
+  const confirmed = await confirmDialog({
+    title: "Excluir item",
+    description: "Excluir este item? Essa ação não pode ser desfeita.",
+    confirmLabel: "Excluir",
+    variant: "destructive",
+  });
+  if (!confirmed) return;
 
   pending.value = true;
   try {

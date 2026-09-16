@@ -7,12 +7,19 @@ const props = defineProps<{
 
 const emit = defineEmits<{ changed: [] }>();
 
+const { confirmDialog, alertDialog } = useDialog();
+
 const resetting = ref(false);
 const deleting = ref(false);
 const generatedPassword = ref<string | null>(null);
 
 async function handleResetPassword() {
-  if (!confirm("Gerar uma nova senha para este usuário?")) return;
+  const confirmed = await confirmDialog({
+    title: "Redefinir senha",
+    description: "Gerar uma nova senha para este usuário?",
+    confirmLabel: "Gerar senha",
+  });
+  if (!confirmed) return;
 
   resetting.value = true;
   try {
@@ -23,14 +30,23 @@ async function handleResetPassword() {
     generatedPassword.value = password;
   } catch (err) {
     const data = (err as { data?: { statusMessage?: string } })?.data;
-    alert(data?.statusMessage ?? "Erro ao resetar senha.");
+    await alertDialog({
+      title: "Erro",
+      description: data?.statusMessage ?? "Erro ao resetar senha.",
+    });
   } finally {
     resetting.value = false;
   }
 }
 
 async function handleDelete() {
-  if (!confirm("Excluir este usuário? Essa ação não pode ser desfeita.")) return;
+  const confirmed = await confirmDialog({
+    title: "Excluir usuário",
+    description: "Excluir este usuário? Essa ação não pode ser desfeita.",
+    confirmLabel: "Excluir",
+    variant: "destructive",
+  });
+  if (!confirmed) return;
 
   deleting.value = true;
   try {
@@ -41,7 +57,10 @@ async function handleDelete() {
     emit("changed");
   } catch (err) {
     const data = (err as { data?: { statusMessage?: string } })?.data;
-    alert(data?.statusMessage ?? "Erro ao excluir usuário.");
+    await alertDialog({
+      title: "Erro",
+      description: data?.statusMessage ?? "Erro ao excluir usuário.",
+    });
   } finally {
     deleting.value = false;
   }
