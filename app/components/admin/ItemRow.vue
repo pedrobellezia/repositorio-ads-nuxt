@@ -12,6 +12,7 @@ const { updateItem } = useItemActions();
 
 const editing = ref(false);
 const pending = ref(false);
+const errorMessage = ref<string | null>(null);
 
 const form = reactive({
   name: props.item.name,
@@ -24,6 +25,7 @@ const tagIds = ref(new Set(props.item.tags.map((t) => t.id)));
 const file = ref<File | null>(null);
 
 async function handleSubmit() {
+  errorMessage.value = null;
   pending.value = true;
   try {
     await updateItem(props.item.id, {
@@ -33,6 +35,9 @@ async function handleSubmit() {
     });
     editing.value = false;
     file.value = null;
+  } catch (err: unknown) {
+    errorMessage.value =
+      err instanceof Error ? err.message : "Erro ao salvar item.";
   } finally {
     pending.value = false;
   }
@@ -67,13 +72,18 @@ async function handleSubmit() {
           :has-existing-file="!!item.file_path"
           @file-change="(f) => (file = f)"
         />
-        <div class="mt-6 flex justify-end gap-2">
-          <UiButton type="button" variant="ghost" @click="editing = false">
-            Cancelar
-          </UiButton>
-          <UiButton type="submit" :disabled="pending">
-            {{ pending ? "Salvando..." : "Salvar" }}
-          </UiButton>
+        <div class="mt-6 space-y-3">
+          <p v-if="errorMessage" class="text-sm text-red-600">
+            {{ errorMessage }}
+          </p>
+          <div class="flex justify-end gap-2">
+            <UiButton type="button" variant="ghost" @click="editing = false">
+              Cancelar
+            </UiButton>
+            <UiButton type="submit" :disabled="pending">
+              {{ pending ? "Salvando..." : "Salvar" }}
+            </UiButton>
+          </div>
         </div>
       </form>
     </UiModal>

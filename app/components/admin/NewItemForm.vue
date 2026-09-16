@@ -13,6 +13,7 @@ const { createItem } = useItemActions();
 
 const open = ref(false);
 const pending = ref(false);
+const errorMessage = ref<string | null>(null);
 
 function emptyForm() {
   return {
@@ -32,9 +33,11 @@ function resetForm() {
   Object.assign(form, emptyForm());
   tagIds.value = new Set();
   file.value = null;
+  errorMessage.value = null;
 }
 
 async function handleSubmit() {
+  errorMessage.value = null;
   pending.value = true;
   try {
     await createItem({
@@ -44,6 +47,9 @@ async function handleSubmit() {
     });
     open.value = false;
     resetForm();
+  } catch (err: unknown) {
+    errorMessage.value =
+      err instanceof Error ? err.message : "Erro ao criar item.";
   } finally {
     pending.value = false;
   }
@@ -64,13 +70,18 @@ async function handleSubmit() {
         hide-professor-field
         @file-change="(f) => (file = f)"
       />
-      <div class="mt-6 flex justify-end gap-2">
-        <UiButton type="button" variant="ghost" @click="open = false">
-          Cancelar
-        </UiButton>
-        <UiButton type="submit" :disabled="pending">
-          {{ pending ? "Salvando..." : "Criar item" }}
-        </UiButton>
+      <div class="mt-6 space-y-3">
+        <p v-if="errorMessage" class="text-sm text-red-600">
+          {{ errorMessage }}
+        </p>
+        <div class="flex justify-end gap-2">
+          <UiButton type="button" variant="ghost" @click="open = false">
+            Cancelar
+          </UiButton>
+          <UiButton type="submit" :disabled="pending">
+            {{ pending ? "Salvando..." : "Criar item" }}
+          </UiButton>
+        </div>
       </div>
     </form>
   </UiModal>
