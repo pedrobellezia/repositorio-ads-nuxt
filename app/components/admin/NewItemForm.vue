@@ -13,6 +13,7 @@ const { createItem } = useItemActions();
 
 const open = ref(false);
 const pending = ref(false);
+const errorMessage = ref("");
 
 function emptyForm() {
   return {
@@ -32,10 +33,12 @@ function resetForm() {
   Object.assign(form, emptyForm());
   tagIds.value = new Set();
   file.value = null;
+  errorMessage.value = "";
 }
 
 async function handleSubmit() {
   pending.value = true;
+  errorMessage.value = "";
   try {
     await createItem({
       ...form,
@@ -44,6 +47,9 @@ async function handleSubmit() {
     });
     open.value = false;
     resetForm();
+  } catch (err) {
+    errorMessage.value =
+      err instanceof Error ? err.message : "Erro ao criar item.";
   } finally {
     pending.value = false;
   }
@@ -64,6 +70,9 @@ async function handleSubmit() {
         hide-professor-field
         @file-change="(f) => (file = f)"
       />
+      <p v-if="errorMessage" class="text-sm text-red-600">
+        {{ errorMessage }}
+      </p>
       <div class="mt-6 flex justify-end gap-2">
         <UiButton type="button" variant="ghost" @click="open = false">
           Cancelar

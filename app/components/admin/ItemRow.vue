@@ -12,6 +12,7 @@ const { updateItem } = useItemActions();
 
 const editing = ref(false);
 const pending = ref(false);
+const errorMessage = ref("");
 
 const form = reactive({
   name: props.item.name,
@@ -25,6 +26,7 @@ const file = ref<File | null>(null);
 
 async function handleSubmit() {
   pending.value = true;
+  errorMessage.value = "";
   try {
     await updateItem(props.item.id, {
       ...form,
@@ -33,6 +35,9 @@ async function handleSubmit() {
     });
     editing.value = false;
     file.value = null;
+  } catch (err) {
+    errorMessage.value =
+      err instanceof Error ? err.message : "Erro ao salvar item.";
   } finally {
     pending.value = false;
   }
@@ -67,6 +72,9 @@ async function handleSubmit() {
           :has-existing-file="!!item.file_path"
           @file-change="(f) => (file = f)"
         />
+        <p v-if="errorMessage" class="text-sm text-red-600">
+          {{ errorMessage }}
+        </p>
         <div class="mt-6 flex justify-end gap-2">
           <UiButton type="button" variant="ghost" @click="editing = false">
             Cancelar
