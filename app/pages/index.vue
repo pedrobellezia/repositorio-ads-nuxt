@@ -20,7 +20,7 @@ const { data: categories } = await categoriesAsyncData;
         );
       "
     >
-      <div class="mx-auto flex w-full max-w-[1252px] justify-end">
+      <div class="mx-auto flex w-full max-w-[1350px] justify-end">
         <NuxtLink
           to="/login"
           class="shrink-0 rounded-full border-2 border-white/70 px-4 py-1.5 font-heading text-sm font-semibold text-white transition-colors hover:bg-white hover:text-secondary"
@@ -28,7 +28,7 @@ const { data: categories } = await categoriesAsyncData;
           Área do professor
         </NuxtLink>
       </div>
-      <div class="mx-auto mt-4 flex w-full max-w-[1252px] flex-col items-center gap-4 text-center">
+      <div class="mx-auto mt-4 flex w-full max-w-[1350px] flex-col items-center gap-4 text-center">
         <img
           src="/ads-logo-color.png"
           alt="ADS — Análise e Desenvolvimento de Sistemas"
@@ -46,7 +46,7 @@ const { data: categories } = await categoriesAsyncData;
       </div>
     </header>
 
-    <div class="mx-auto w-full max-w-[1252px] px-4 py-10">
+    <div class="mx-auto w-full max-w-[1350px] px-4 py-10">
       <SiteItemBrowser
         :items="items ?? []"
         :tags="tags ?? []"
