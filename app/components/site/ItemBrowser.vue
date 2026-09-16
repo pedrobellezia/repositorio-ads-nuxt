@@ -184,42 +184,91 @@ function filterBtnClass(active: boolean, color?: string) {
       </div>
 
       <!-- Tags filter -->
-      <div v-if="tags.length > 0">
-        <h2 class="mb-2 font-heading text-sm font-semibold text-secondary">
-          Tags
-        </h2>
-        <div class="flex flex-wrap gap-1.5 md:flex-col md:items-start">
+      <div v-if="tags.length > 0" class="pt-1">
+        <div class="mb-2 flex items-center justify-between">
+          <h2 class="flex items-center gap-1.5 font-heading text-sm font-semibold text-secondary">
+            <span>Tags</span>
+            <span
+              v-if="selectedTags.size > 0"
+              class="rounded-full bg-secondary px-1.5 py-0.5 text-[10px] font-bold text-white"
+            >
+              {{ selectedTags.size }}
+            </span>
+          </h2>
           <button
-            v-for="tag in tags"
-            :key="tag.id"
-            :class="
-              cn(
-                'inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors',
-                selectedTags.has(tag.id)
-                  ? 'border-secondary bg-secondary text-white'
-                  : 'border-transparent bg-section text-secondary hover:bg-accent-border/20',
-              )
-            "
-            @click="toggleTag(tag.id)"
+            v-if="selectedTags.size > 0"
+            type="button"
+            class="text-[11px] font-medium text-slate-500 transition-colors hover:text-red-600"
+            @click="clearTags"
           >
-            <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
-            {{ tag.name }}
+            Limpar
           </button>
         </div>
-        <UiButton
-          v-if="selectedTags.size > 0"
-          variant="ghost"
-          size="sm"
-          class="mt-2"
-          @click="clearTags"
-        >
-          Limpar tags
-        </UiButton>
+
+        <!-- Grouped tags with custom scrollbar when there are many -->
+        <div class="custom-scrollbar max-h-48 overflow-y-auto pr-1">
+          <div class="flex flex-wrap gap-1.5">
+            <button
+              v-for="tag in tags"
+              :key="tag.id"
+              :class="
+                cn(
+                  'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-all',
+                  selectedTags.has(tag.id)
+                    ? 'border-secondary bg-secondary text-white shadow-xs'
+                    : 'border-accent-border/30 bg-section text-secondary hover:border-secondary/40 hover:bg-accent-border/20',
+                )
+              "
+              @click="toggleTag(tag.id)"
+            >
+              <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
+              <span>{{ tag.name }}</span>
+            </button>
+          </div>
+        </div>
       </div>
     </aside>
 
-    <!-- Items grid -->
-    <div>
+    <!-- Items column -->
+    <div class="min-w-0">
+      <!-- Horizontal tag slide bar on top of items -->
+      <div
+        v-if="tags.length > 0"
+        class="custom-scrollbar mb-4 flex items-center gap-2 overflow-x-auto pb-2 pt-0.5"
+      >
+        <button
+          type="button"
+          :class="
+            cn(
+              'shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-all',
+              selectedTags.size === 0
+                ? 'border-secondary bg-secondary text-white shadow-xs'
+                : 'border-accent-border/30 bg-surface text-secondary hover:bg-section',
+            )
+          "
+          @click="clearTags"
+        >
+          Todas as tags
+        </button>
+        <button
+          v-for="tag in tags"
+          :key="tag.id"
+          type="button"
+          :class="
+            cn(
+              'inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-all',
+              selectedTags.has(tag.id)
+                ? 'border-secondary bg-secondary text-white shadow-xs'
+                : 'border-accent-border/30 bg-surface text-secondary hover:border-secondary/40 hover:bg-section',
+            )
+          "
+          @click="toggleTag(tag.id)"
+        >
+          <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
+          <span>{{ tag.name }}</span>
+        </button>
+      </div>
+
       <p v-if="filteredItems.length === 0" class="text-sm text-slate-500">
         Nenhum item encontrado com esses filtros.
       </p>

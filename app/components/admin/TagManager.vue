@@ -90,21 +90,23 @@ async function handleDeleteTag(tag: Tag) {
       <p v-if="tags.length === 0" class="text-xs text-slate-500">
         Nenhuma tag ainda.
       </p>
-      <div v-else class="flex flex-wrap gap-2">
-        <span
-          v-for="tag in tags"
-          :key="tag.id"
-          class="inline-flex items-center gap-2 rounded-full border border-transparent bg-section py-1 pl-3 pr-1 text-sm text-secondary"
-        >
-          <SiteTagIcon :icon="tag.icon" class="h-3.5 w-3.5" />
-          {{ tag.name }}
-          <button
-            class="rounded-full px-1.5 text-slate-400 hover:bg-white hover:text-red-600"
-            @click="handleDeleteTag(tag)"
+      <div v-else class="custom-scrollbar max-h-64 overflow-y-auto pr-1">
+        <div class="flex flex-wrap gap-2">
+          <span
+            v-for="tag in tags"
+            :key="tag.id"
+            class="inline-flex items-center gap-2 rounded-full border border-transparent bg-section py-1 pl-3 pr-1 text-sm text-secondary"
           >
-            ×
-          </button>
-        </span>
+            <SiteTagIcon :icon="tag.icon" class="h-3.5 w-3.5" />
+            {{ tag.name }}
+            <button
+              class="rounded-full px-1.5 text-slate-400 hover:bg-white hover:text-red-600"
+              @click="handleDeleteTag(tag)"
+            >
+              ×
+            </button>
+          </span>
+        </div>
       </div>
     </div>
 

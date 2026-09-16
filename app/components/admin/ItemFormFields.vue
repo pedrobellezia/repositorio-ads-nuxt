@@ -136,24 +136,26 @@ function toggleTag(tagId: string) {
       <p v-if="tags.length === 0" class="text-xs text-slate-500">
         Nenhuma tag cadastrada ainda.
       </p>
-      <div v-else class="flex flex-wrap gap-2">
-        <button
-          v-for="tag in tags"
-          :key="tag.id"
-          type="button"
-          :class="
-            cn(
-              'inline-flex items-center gap-1.5 rounded-full border border-accent-border/50 px-3 py-1 text-xs font-medium transition-colors',
-              tagIds.has(tag.id)
-                ? 'border-secondary bg-secondary text-white hover:bg-primary'
-                : 'bg-white text-secondary hover:bg-section',
-            )
-          "
-          @click="toggleTag(tag.id)"
-        >
-          <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
-          {{ tag.name }}
-        </button>
+      <div v-else class="custom-scrollbar max-h-36 overflow-y-auto pr-1">
+        <div class="flex flex-wrap gap-2">
+          <button
+            v-for="tag in tags"
+            :key="tag.id"
+            type="button"
+            :class="
+              cn(
+                'inline-flex items-center gap-1.5 rounded-full border border-accent-border/50 px-3 py-1 text-xs font-medium transition-colors',
+                tagIds.has(tag.id)
+                  ? 'border-secondary bg-secondary text-white hover:bg-primary'
+                  : 'bg-white text-secondary hover:bg-section',
+              )
+            "
+            @click="toggleTag(tag.id)"
+          >
+            <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
+            {{ tag.name }}
+          </button>
+        </div>
       </div>
     </div>
   </div>

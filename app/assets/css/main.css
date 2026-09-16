@@ -69,3 +69,25 @@ h5,
 h6 {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
 }
+
+/* Custom slim scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(3, 46, 71, 0.05);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 rgba(3, 46, 71, 0.05);
+}
+
