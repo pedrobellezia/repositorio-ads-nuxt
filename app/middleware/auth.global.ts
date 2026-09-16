@@ -1,4 +1,4 @@
-const PROTECTED_ROUTES = ["/items", "/tags", "/professores", "/conta"];
+const PROTECTED_ROUTES = ["/items", "/tags", "/professores"];
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const user = useSupabaseUser();

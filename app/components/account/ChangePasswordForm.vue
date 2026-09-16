@@ -25,12 +25,7 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <form
-    class="space-y-4 rounded-xl border border-accent-border/40 bg-surface p-4 shadow-[0_1px_0.5rem_-0.25rem_rgba(3,46,71,0.1)]"
-    @submit.prevent="handleSubmit"
-  >
-    <h2 class="text-sm font-heading font-semibold text-secondary">Minha senha</h2>
-
+  <form class="space-y-4" @submit.prevent="handleSubmit">
     <div class="space-y-1.5">
       <UiLabel for="current-password">Senha atual</UiLabel>
       <UiInput

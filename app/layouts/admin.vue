@@ -31,10 +31,7 @@ function navLinkClass(path: string) {
       "
     >
       <div class="mx-auto flex w-full max-w-3xl justify-end">
-        <AdminUserMenu
-          :display-name="profile?.display_name ?? 'Sem nome'"
-          :role-label="isAdmin ? 'admin' : 'professor'"
-        />
+        <AdminUserMenu :display-name="profile?.display_name ?? 'Sem nome'" />
       </div>
       <div class="mx-auto mt-2 flex w-full max-w-3xl flex-col items-center gap-3 text-center">
         <NuxtLink to="/">
