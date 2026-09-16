@@ -1,11 +1,10 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { ITEM_FILES_BUCKET, MAX_ITEM_FILE_SIZE_BYTES } from "@/lib/storage";
-import type { Phase } from "@/lib/types";
 
 export type ItemFormValues = {
   name: string;
   description: string;
-  phase: Phase;
+  subcategory_id: string;
   professor_name: string;
   link_url: string;
   tagIds: string[];
@@ -56,12 +55,16 @@ export function useItemActions() {
       throw new Error("Informe um link externo ou envie um arquivo.");
     }
 
+    if (!values.subcategory_id) {
+      throw new Error("Selecione uma subcategoria.");
+    }
+
     const { data: item, error } = await supabase
       .from("items")
       .insert({
         name: values.name.trim(),
         description: values.description.trim(),
-        phase: values.phase,
+        subcategory_id: values.subcategory_id,
         professor_name: values.professor_name.trim() || null,
         link_url: linkUrl,
         file_path: filePath,
@@ -79,10 +82,14 @@ export function useItemActions() {
   async function updateItem(itemId: string, values: ItemFormValues) {
     const newFilePath = await uploadFileIfPresent(supabase, values.file);
 
+    if (!values.subcategory_id) {
+      throw new Error("Selecione uma subcategoria.");
+    }
+
     const update: Record<string, unknown> = {
       name: values.name.trim(),
       description: values.description.trim(),
-      phase: values.phase,
+      subcategory_id: values.subcategory_id,
       professor_name: values.professor_name.trim() || null,
       link_url: values.link_url.trim() || null,
     };

@@ -8,12 +8,13 @@ const props = defineProps<{
 }>();
 
 const { searchSimilarTags, createTag, deleteTag } = useTagActions();
-const { confirmDialog } = useDialog();
+const { confirmDialog, alertDialog } = useDialog();
 
 const name = ref("");
 const icon = ref(TAG_ICON_OPTIONS[0] ?? "code");
 const similar = ref<SimilarTag[] | null>(null);
 const pending = ref(false);
+const errorMessage = ref<string | null>(null);
 
 async function handleCreate() {
   if (!name.value.trim()) return;
@@ -29,10 +30,14 @@ async function handleCreate() {
 
 async function confirmCreate() {
   similar.value = null;
+  errorMessage.value = null;
   pending.value = true;
   try {
     await createTag(name.value.trim(), icon.value);
     name.value = "";
+  } catch (err: unknown) {
+    errorMessage.value =
+      err instanceof Error ? err.message : "Erro ao criar tag.";
   } finally {
     pending.value = false;
   }
@@ -46,7 +51,15 @@ async function handleDeleteTag(tag: Tag) {
     variant: "destructive",
   });
   if (confirmed) {
-    await deleteTag(tag.id);
+    try {
+      await deleteTag(tag.id);
+    } catch (err: unknown) {
+      await alertDialog({
+        title: "Erro",
+        description:
+          err instanceof Error ? err.message : "Erro ao excluir tag.",
+      });
+    }
   }
 }
 </script>
@@ -65,6 +78,9 @@ async function handleDeleteTag(tag: Tag) {
         <UiIconPicker v-model="icon" />
       </div>
 
+      <p v-if="errorMessage" class="text-sm text-red-600">
+        {{ errorMessage }}
+      </p>
       <UiButton :disabled="pending" @click="handleCreate">
         Criar tag
       </UiButton>

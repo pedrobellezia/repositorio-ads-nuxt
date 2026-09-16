@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import type { Phase, Tag } from "@/lib/types";
+import type { CategoryWithSubs, Tag } from "@/lib/types";
 
 const props = defineProps<{
   tags: Tag[];
+  categories: CategoryWithSubs[];
   // Preenchido automaticamente com o professor logado; fica vazio (item
   // geral) quando quem cria é admin. Não é editável na criação.
   professorName?: string | null;
@@ -19,7 +20,8 @@ function emptyForm() {
   return {
     name: "",
     description: "",
-    phase: "geral" as Phase,
+    category_id: "",
+    subcategory_id: "",
     professor_name: props.professorName ?? "",
     link_url: "",
   };
@@ -67,6 +69,7 @@ async function handleSubmit() {
         v-model:form="form"
         v-model:tag-ids="tagIds"
         :tags="tags"
+        :categories="categories"
         hide-professor-field
         @file-change="(f) => (file = f)"
       />

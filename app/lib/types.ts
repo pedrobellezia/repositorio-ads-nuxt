@@ -1,29 +1,31 @@
-export const PHASES = [
-  "geral",
-  "1fase",
-  "2fase",
-  "3fase",
-  "4fase",
-  "5fase",
-] as const;
-
-export type Phase = (typeof PHASES)[number];
-
-export const PHASE_LABELS: Record<Phase, string> = {
-  geral: "Geral",
-  "1fase": "1ª Fase",
-  "2fase": "2ª Fase",
-  "3fase": "3ª Fase",
-  "4fase": "4ª Fase",
-  "5fase": "5ª Fase",
-};
-
 export type Role = "admin" | "professor";
 
 export type Profile = {
   id: string;
   role: Role;
   display_name: string | null;
+};
+
+export type Category = {
+  id: string;
+  name: string;
+  slug: string;
+  color: string;
+  position: number;
+  created_at: string;
+};
+
+export type Subcategory = {
+  id: string;
+  category_id: string;
+  name: string;
+  slug: string;
+  position: number;
+  created_at: string;
+};
+
+export type CategoryWithSubs = Category & {
+  subcategories: Subcategory[];
 };
 
 export type Tag = {
@@ -39,7 +41,7 @@ export type Item = {
   id: string;
   name: string;
   description: string;
-  phase: Phase;
+  subcategory_id: string | null;
   professor_name: string | null;
   link_url: string | null;
   file_path: string | null;
@@ -50,6 +52,7 @@ export type Item = {
 
 export type ItemWithTags = Item & {
   tags: Tag[];
+  subcategory: (Subcategory & { category: Category }) | null;
 };
 
 export type SimilarTag = {

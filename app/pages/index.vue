@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const itemsAsyncData = usePublicItems();
 const tagsAsyncData = useTags();
+const categoriesAsyncData = useCategories();
 
 const { data: items } = await itemsAsyncData;
 const { data: tags } = await tagsAsyncData;
+const { data: categories } = await categoriesAsyncData;
 </script>
 
 <template>
@@ -38,14 +40,18 @@ const { data: tags } = await tagsAsyncData;
           Repositório Acadêmico
         </h1>
         <p class="max-w-2xl text-sm text-white/85 sm:text-base">
-          Links e documentos do curso de ADS organizados por fase e por
+          Links e documentos do curso de ADS organizados por categorias e por
           tags, centralizados para estudantes e professores.
         </p>
       </div>
     </header>
 
     <div class="mx-auto w-full max-w-6xl px-4 py-10">
-      <SiteItemBrowser :items="items ?? []" :tags="tags ?? []" />
+      <SiteItemBrowser
+        :items="items ?? []"
+        :tags="tags ?? []"
+        :categories="categories ?? []"
+      />
     </div>
   </div>
 </template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { PHASE_LABELS } from "@/lib/types";
-import type { ItemWithTags, Tag } from "@/lib/types";
+import type { CategoryWithSubs, ItemWithTags, Tag } from "@/lib/types";
 
 const props = defineProps<{
   item: ItemWithTags;
   tags: Tag[];
+  categories: CategoryWithSubs[];
 }>();
 
 const { updateItem } = useItemActions();
@@ -17,7 +17,8 @@ const errorMessage = ref<string | null>(null);
 const form = reactive({
   name: props.item.name,
   description: props.item.description,
-  phase: props.item.phase,
+  category_id: props.item.subcategory?.category_id ?? "",
+  subcategory_id: props.item.subcategory_id ?? "",
   professor_name: props.item.professor_name ?? "",
   link_url: props.item.link_url ?? "",
 });
@@ -51,7 +52,12 @@ async function handleSubmit() {
     <div>
       <p class="font-heading font-semibold text-secondary">{{ item.name }}</p>
       <div class="mt-1 flex flex-wrap items-center gap-1.5">
-        <UiBadge variant="outline">{{ PHASE_LABELS[item.phase] }}</UiBadge>
+        <UiBadge v-if="item.subcategory" variant="outline">
+          {{ item.subcategory.category.name }} › {{ item.subcategory.name }}
+        </UiBadge>
+        <UiBadge v-else variant="outline" class="text-slate-400">
+          Sem categoria
+        </UiBadge>
         <UiBadge v-for="tag in item.tags" :key="tag.id">{{ tag.name }}</UiBadge>
       </div>
     </div>
@@ -69,6 +75,7 @@ async function handleSubmit() {
           v-model:form="form"
           v-model:tag-ids="tagIds"
           :tags="tags"
+          :categories="categories"
           :has-existing-file="!!item.file_path"
           @file-change="(f) => (file = f)"
         />

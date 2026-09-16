@@ -53,7 +53,7 @@ function navLinkClass(path: string) {
           Repositório Acadêmico
         </h1>
         <p class="max-w-2xl text-sm text-white/85 sm:text-base">
-          Links e documentos do curso de ADS organizados por fase e por
+          Links e documentos do curso de ADS organizados por categorias e por
           tags, centralizados para estudantes e professores.
         </p>
       </div>
@@ -65,7 +65,7 @@ function navLinkClass(path: string) {
           Itens
         </NuxtLink>
         <NuxtLink to="/tags" :class="navLinkClass('/tags')">
-          Tags
+          Tags &amp; Categorias
         </NuxtLink>
         <NuxtLink
           v-if="isAdmin"

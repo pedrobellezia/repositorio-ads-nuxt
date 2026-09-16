@@ -3,10 +3,12 @@ definePageMeta({ layout: "admin" });
 
 const itemsAsyncData = usePublicItems();
 const tagsAsyncData = useTags();
+const categoriesAsyncData = useCategories();
 const profileAsyncData = useProfile();
 
 const { data: items } = await itemsAsyncData;
 const { data: tags } = await tagsAsyncData;
+const { data: categories } = await categoriesAsyncData;
 const { data: profile } = await profileAsyncData;
 </script>
 
@@ -16,6 +18,7 @@ const { data: profile } = await profileAsyncData;
       <h1 class="text-xl font-heading font-bold text-secondary">Itens</h1>
       <AdminNewItemForm
         :tags="tags ?? []"
+        :categories="categories ?? []"
         :professor-name="profile?.role === 'professor' ? profile.display_name : null"
       />
     </div>
@@ -29,6 +32,7 @@ const { data: profile } = await profileAsyncData;
         :key="item.id"
         :item="item"
         :tags="tags ?? []"
+        :categories="categories ?? []"
       />
     </div>
   </div>

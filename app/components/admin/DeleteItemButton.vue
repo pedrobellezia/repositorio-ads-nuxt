@@ -6,7 +6,7 @@ const props = defineProps<{
 }>();
 
 const { deleteItem } = useItemActions();
-const { confirmDialog } = useDialog();
+const { confirmDialog, alertDialog } = useDialog();
 const pending = ref(false);
 
 async function handleDelete() {
@@ -21,6 +21,12 @@ async function handleDelete() {
   pending.value = true;
   try {
     await deleteItem(props.itemId);
+  } catch (err: unknown) {
+    await alertDialog({
+      title: "Erro",
+      description:
+        err instanceof Error ? err.message : "Erro ao excluir item.",
+    });
   } finally {
     pending.value = false;
   }

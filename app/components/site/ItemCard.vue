@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Download, FileText } from "@lucide/vue";
-import { PHASE_LABELS, type ItemWithTags } from "@/lib/types";
-import { PHASE_COLORS } from "@/lib/phase-colors";
+import type { ItemWithTags } from "@/lib/types";
 import { getPublicFileUrl } from "@/lib/storage";
 
 defineProps<{
@@ -13,19 +12,21 @@ defineProps<{
   <div
     class="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-accent-border/20 bg-surface p-5 shadow-[0_1rem_2rem_-0.5rem_rgba(3,46,71,0.12)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_1.5rem_3rem_-0.75rem_rgba(3,46,71,0.2)]"
   >
+    <!-- Category color strip -->
     <span
       class="absolute inset-x-0 top-0 h-1.5"
-      :style="{ backgroundColor: PHASE_COLORS[item.phase] }"
+      :style="{ backgroundColor: item.subcategory?.category.color ?? '#13547a' }"
       aria-hidden="true"
     />
 
     <div class="flex items-start justify-between gap-2">
       <h3 class="font-heading font-semibold text-secondary">{{ item.name }}</h3>
       <span
+        v-if="item.subcategory"
         class="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold text-white"
-        :style="{ backgroundColor: PHASE_COLORS[item.phase] }"
+        :style="{ backgroundColor: item.subcategory.category.color ?? '#13547a' }"
       >
-        {{ PHASE_LABELS[item.phase] }}
+        {{ item.subcategory.name }}
       </span>
     </div>
 

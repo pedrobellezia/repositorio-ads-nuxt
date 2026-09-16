@@ -15,11 +15,13 @@ const open = ref(false);
 const root = ref<HTMLElement | null>(null);
 const newName = ref("");
 const savingName = ref(false);
+const savingNameError = ref<string | null>(null);
 const passwordModalOpen = ref(false);
 
 function closeMenu() {
   open.value = false;
   newName.value = "";
+  savingNameError.value = null;
 }
 
 function toggle() {
@@ -43,9 +45,13 @@ async function handleSaveName() {
   if (!newName.value.trim()) return;
 
   savingName.value = true;
+  savingNameError.value = null;
   try {
     await updateDisplayName(newName.value);
     closeMenu();
+  } catch (err: unknown) {
+    savingNameError.value =
+      err instanceof Error ? err.message : "Erro ao salvar nome.";
   } finally {
     savingName.value = false;
   }
@@ -89,6 +95,9 @@ async function handleSignOut() {
         >
           {{ savingName ? "Salvando..." : "Salvar" }}
         </UiButton>
+        <p v-if="savingNameError" class="text-xs text-red-600">
+          {{ savingNameError }}
+        </p>
       </div>
 
       <div class="my-3 border-t border-accent-border/40" />

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { PHASE_LABELS, PHASES } from "@/lib/types";
-import type { Tag } from "@/lib/types";
+import { computed, watch } from "vue";
+import type { CategoryWithSubs, Tag } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 defineProps<{
   tags: Tag[];
+  categories: CategoryWithSubs[];
   hasExistingFile?: boolean;
   hideProfessorField?: boolean;
 }>();
@@ -14,12 +15,20 @@ const emit = defineEmits<{ "file-change": [file: File | null] }>();
 const form = defineModel<{
   name: string;
   description: string;
-  phase: string;
+  category_id: string;
+  subcategory_id: string;
   professor_name: string;
   link_url: string;
 }>("form", { required: true });
 
 const tagIds = defineModel<Set<string>>("tagIds", { required: true });
+
+// Subcategories filtered by selected category
+const availableSubcategories = computed(() => {
+  if (!form.value.category_id) return [];
+  // will be passed from parent via categories prop
+  return [];
+});
 
 function onFileChange(e: Event) {
   const input = e.target as HTMLInputElement;
@@ -46,15 +55,46 @@ function toggleTag(tagId: string) {
       <UiTextarea id="description" v-model="form.description" />
     </div>
 
+    <!-- Categoria -->
     <div class="space-y-1.5">
-      <UiLabel for="phase">Fase</UiLabel>
+      <UiLabel for="category_id">Categoria</UiLabel>
       <select
-        id="phase"
-        v-model="form.phase"
+        id="category_id"
+        v-model="form.category_id"
         class="flex h-10 w-full rounded-lg border border-accent-border/60 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        required
+        @change="form.subcategory_id = ''"
       >
-        <option v-for="p in PHASES" :key="p" :value="p">
-          {{ PHASE_LABELS[p] }}
+        <option value="" disabled>Selecione uma categoria</option>
+        <option
+          v-for="cat in categories"
+          :key="cat.id"
+          :value="cat.id"
+        >
+          {{ cat.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Subcategoria (cascata) -->
+    <div class="space-y-1.5">
+      <UiLabel for="subcategory_id">Subcategoria</UiLabel>
+      <select
+        id="subcategory_id"
+        v-model="form.subcategory_id"
+        class="flex h-10 w-full rounded-lg border border-accent-border/60 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+        required
+        :disabled="!form.category_id"
+      >
+        <option value="" disabled>
+          {{ form.category_id ? "Selecione a subcategoria" : "Selecione a categoria primeiro" }}
+        </option>
+        <option
+          v-for="sub in categories.find((c) => c.id === form.category_id)?.subcategories ?? []"
+          :key="sub.id"
+          :value="sub.id"
+        >
+          {{ sub.name }}
         </option>
       </select>
     </div>
