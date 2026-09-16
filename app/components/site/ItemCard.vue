@@ -19,22 +19,29 @@ defineProps<{
       aria-hidden="true"
     />
 
-    <div class="flex items-start justify-between gap-2">
-      <h3 class="font-heading font-semibold text-secondary">{{ item.name }}</h3>
-      <span
-        v-if="item.subcategory"
-        class="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold text-white"
-        :style="{ backgroundColor: item.subcategory.category.color ?? '#13547a' }"
-      >
-        {{ item.subcategory.name }}
-      </span>
+    <!-- Subcategory / Category badge row -->
+    <div class="flex flex-col gap-1.5">
+      <div v-if="item.subcategory" class="flex items-center gap-1.5 flex-wrap">
+        <span
+          class="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold text-white shadow-2xs"
+          :style="{ backgroundColor: item.subcategory.category.color ?? '#13547a' }"
+        >
+          <span class="font-normal opacity-85">{{ item.subcategory.category.name }} ›</span>
+          <span>{{ item.subcategory.name }}</span>
+        </span>
+      </div>
+
+      <!-- Item title with full width and clear hierarchy -->
+      <h3 class="font-heading text-base font-semibold leading-snug text-secondary">
+        {{ item.name }}
+      </h3>
     </div>
 
-    <p v-if="item.description" class="text-sm text-slate-600">
+    <p v-if="item.description" class="line-clamp-3 text-sm leading-relaxed text-slate-600">
       {{ item.description }}
     </p>
 
-    <p v-if="item.professor_name" class="text-xs text-slate-500">
+    <p v-if="item.professor_name" class="text-xs font-medium text-slate-500">
       Professor(a): {{ item.professor_name }}
     </p>
 

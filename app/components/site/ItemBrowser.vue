@@ -234,7 +234,7 @@ function filterBtnClass(active: boolean, color?: string) {
       <p v-if="filteredItems.length === 0" class="text-sm text-slate-500">
         Nenhum item encontrado com esses filtros.
       </p>
-      <div v-else class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div v-else class="grid gap-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <SiteItemCard v-for="item in filteredItems" :key="item.id" :item="item" />
       </div>
     </div>
