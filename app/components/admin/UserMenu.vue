@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronDown, DoorOpen } from "@lucide/vue";
+import { ChevronDown, DoorOpen, Settings } from "@lucide/vue";
 import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -46,8 +46,16 @@ async function handleSignOut() {
 
     <div
       v-if="open"
-      class="absolute right-0 top-full z-10 mt-2 w-40 overflow-hidden rounded-xl border border-accent-border/40 bg-surface py-1 text-left shadow-lg"
+      class="absolute right-0 top-full z-10 mt-2 w-44 overflow-hidden rounded-xl border border-accent-border/40 bg-surface py-1 text-left shadow-lg"
     >
+      <NuxtLink
+        to="/conta"
+        class="flex w-full items-center gap-2 px-3 py-2 text-sm font-medium text-secondary transition-colors hover:bg-section"
+        @click="open = false"
+      >
+        <Settings class="h-4 w-4" />
+        Minha conta
+      </NuxtLink>
       <button
         type="button"
         class="flex w-full items-center gap-2 px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
