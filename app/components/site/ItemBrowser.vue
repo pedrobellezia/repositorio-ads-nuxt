@@ -231,44 +231,6 @@ function filterBtnClass(active: boolean, color?: string) {
 
     <!-- Items column -->
     <div class="min-w-0">
-      <!-- Horizontal tag slide bar on top of items -->
-      <div
-        v-if="tags.length > 0"
-        class="custom-scrollbar mb-4 flex items-center gap-2 overflow-x-auto pb-2 pt-0.5"
-      >
-        <button
-          type="button"
-          :class="
-            cn(
-              'shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-all',
-              selectedTags.size === 0
-                ? 'border-secondary bg-secondary text-white shadow-xs'
-                : 'border-accent-border/30 bg-surface text-secondary hover:bg-section',
-            )
-          "
-          @click="clearTags"
-        >
-          Todas as tags
-        </button>
-        <button
-          v-for="tag in tags"
-          :key="tag.id"
-          type="button"
-          :class="
-            cn(
-              'inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-all',
-              selectedTags.has(tag.id)
-                ? 'border-secondary bg-secondary text-white shadow-xs'
-                : 'border-accent-border/30 bg-surface text-secondary hover:border-secondary/40 hover:bg-section',
-            )
-          "
-          @click="toggleTag(tag.id)"
-        >
-          <SiteTagIcon :icon="tag.icon" class="h-3 w-3" />
-          <span>{{ tag.name }}</span>
-        </button>
-      </div>
-
       <p v-if="filteredItems.length === 0" class="text-sm text-slate-500">
         Nenhum item encontrado com esses filtros.
       </p>
