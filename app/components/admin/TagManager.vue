@@ -8,6 +8,7 @@ const props = defineProps<{
 }>();
 
 const { searchSimilarTags, createTag, deleteTag } = useTagActions();
+const { confirmDialog } = useDialog();
 
 const name = ref("");
 const icon = ref(TAG_ICON_OPTIONS[0] ?? "code");
@@ -37,9 +38,15 @@ async function confirmCreate() {
   }
 }
 
-function handleDeleteTag(tag: Tag) {
-  if (confirm(`Excluir a tag "${tag.name}"?`)) {
-    deleteTag(tag.id);
+async function handleDeleteTag(tag: Tag) {
+  const confirmed = await confirmDialog({
+    title: "Excluir tag",
+    description: `Excluir a tag "${tag.name}"? Essa ação não pode ser desfeita.`,
+    confirmLabel: "Excluir",
+    variant: "destructive",
+  });
+  if (confirmed) {
+    await deleteTag(tag.id);
   }
 }
 </script>
