@@ -12,6 +12,8 @@ const { data: rows, refresh } = await useFetch<ProfessorRow[]>(
   "/api/admin/professors",
   { key: "admin-professors" },
 );
+
+const user = useSupabaseUser();
 </script>
 
 <template>
@@ -30,7 +32,7 @@ const { data: rows, refresh } = await useFetch<ProfessorRow[]>(
       <div
         v-for="row in rows"
         :key="row.id"
-        class="flex items-center justify-between rounded-xl border border-accent-border/40 bg-surface p-3"
+        class="flex items-center justify-between gap-3 rounded-xl border border-accent-border/40 bg-surface p-3"
       >
         <div>
           <p class="text-sm font-medium text-secondary">
@@ -38,9 +40,16 @@ const { data: rows, refresh } = await useFetch<ProfessorRow[]>(
           </p>
           <p class="text-xs text-slate-500">{{ row.email }}</p>
         </div>
-        <UiBadge :variant="row.role === 'admin' ? 'default' : 'secondary'">
-          {{ row.role }}
-        </UiBadge>
+        <div class="flex items-center gap-3">
+          <UiBadge :variant="row.role === 'admin' ? 'default' : 'secondary'">
+            {{ row.role }}
+          </UiBadge>
+          <AdminUserActions
+            v-if="row.id !== user?.sub"
+            :user-id="row.id"
+            @changed="refresh"
+          />
+        </div>
       </div>
     </div>
   </div>
