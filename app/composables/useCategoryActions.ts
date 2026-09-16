@@ -21,24 +21,29 @@ export function useCategoryActions() {
 
   async function deleteCategory(categoryId: string) {
     // Check for items linked to any subcategory of this category
-    const { count, error: countError } = await supabase
-      .from("items")
-      .select("id", { count: "exact", head: true })
-      .in(
-        "subcategory_id",
-        supabase
-          .from("subcategories")
-          .select("id")
-          .eq("category_id", categoryId),
-      );
+    const { data: subs, error: subsError } = await supabase
+      .from("subcategories")
+      .select("id")
+      .eq("category_id", categoryId);
 
-    if (countError) throw countError;
+    if (subsError) throw subsError;
 
-    if ((count ?? 0) > 0) {
-      throw new Error(
-        `Não é possível excluir: existem ${count} item(s) vinculado(s) a subcategorias desta categoria.`,
-      );
+    const subIds = (subs ?? []).map((s: { id: string }) => s.id);
+    if (subIds.length > 0) {
+      const { count, error: countError } = await supabase
+        .from("items")
+        .select("id", { count: "exact", head: true })
+        .in("subcategory_id", subIds);
+
+      if (countError) throw countError;
+
+      if ((count ?? 0) > 0) {
+        throw new Error(
+          `Não é possível excluir: existem ${count} item(s) vinculado(s) a subcategorias desta categoria.`,
+        );
+      }
     }
+
 
     const { error } = await supabase
       .from("categories")
