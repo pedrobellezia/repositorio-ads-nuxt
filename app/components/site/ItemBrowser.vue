@@ -92,7 +92,7 @@ function filterBtnClass(active: boolean, color?: string) {
 </script>
 
 <template>
-  <div class="grid gap-6 md:grid-cols-[260px_1fr] md:items-start">
+  <div class="grid gap-6 md:grid-cols-[310px_1fr] md:items-start">
     <!-- Sidebar -->
     <aside
       class="space-y-5 rounded-2xl border border-accent-border/20 bg-surface p-5 shadow-[0_1rem_2rem_-0.5rem_rgba(3,46,71,0.1)] md:sticky md:top-6"
